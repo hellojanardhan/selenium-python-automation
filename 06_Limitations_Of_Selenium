@@ -1,0 +1,45 @@
+📘 Limitations of Selenium
+Even though Selenium is very popular and powerful, it also has some limitations.
+
+⚠️ Main Limitations of Selenium
+1. Cross-Browser Issues
+    -> Selenium supports many browsers
+    -> But sometimes small differences in browsers (HTML / CSS ) can cause failures
+    -> Especially difficult for complex UI applications
+👉 Same test may behave slightly differently in different browsers.
+
+2. Slow test execution
+    -> Selenium uses browser drivers
+    -> Communication between script and browser can take time
+    -> Large applications may run slowly
+
+3. Difficulty Handling Dynamic Elements
+    -> Some web elements have dynamic ID's
+    -> Elements created by AJAX may change frequantly
+    -> Selenium may fail if it cannot locate elements properly
+👉 Requires good locator strategies and waits.
+
+4. Limited Mobile support
+    -> Selenium is mainly for web applications
+    -> It does not support mobile apps.
+    -> For mobile testing , we can use tools like Appium
+
+5. No Desktop Application Support
+    -> Selenium cannot automate windows desktop apps
+    -> It is only for browser based applications
+
+6. No Built-in Reporting
+    -> Selenium does not generate reports by default
+    -> Needs external frameworks like TestNG , JUnit etc..  for reporting
+
+7. No Advanced Error Handling
+    -> Selenium does not provide strong built-in error handling
+    -> Developers must write custom code to handle failures
+
+8. High maintenance
+    -> It the website UI changes , test script must be updated
+    -> Maintaing large projects can be difficult
+
+9. Needs additional tools
+    -> Sometimes selenium alone is not enough
+    -> It must be combined with frameworks and other tools

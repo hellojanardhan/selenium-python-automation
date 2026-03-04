@@ -1,0 +1,96 @@
+📘 Components of Selenium
+1. Selenium is a web automation tool used to control browsers using programming languages like Python 
+    Java , C# etc..
+2. It works on:
+    -> All major browsers
+    -> All major OS
+    -> Multiple programming languages
+3. Selenium has 4 main components:
+    -> Selenium IDE
+    -> Selenium RC
+    -> Selenium WebDriver
+    -> Selenium Grid
+
+1️⃣ Selenium IDE
+    What is it?
+    -----------
+    Selenium IDE is a browser extension used for recording and playing back tests.
+
+    Mainly used for
+    ---------------
+    1. Beginners
+    2. Quick test execution
+    3. Learning automation
+
+    features
+    --------
+    1. Record and Playback user actions
+    2. Uses Selenese language
+    3. Can export tests to java , Python , C# , Ruby
+    4. Works only with Chrome and FireFox
+    5. Basic debugging(pause , step , inspect)
+
+👉 Easy to use but not suitable for complex automation.
+
+2️⃣ Selenium RC (Remote Control)
+    What is it?
+    -----------
+    Selenium RC is an older selenium tool used before WebDriver.
+
+    How it worked?
+    --------------
+    1. Required a server
+    2. Server acted as middlemen between test code and browser
+
+    Disadvantages
+    -------------
+    1. Slower performance
+    2. Complicated setup
+    3. Not good for modern applications
+👉 Now replaced by WebDriver.
+
+3️⃣ Selenium WebDriver
+    What is it?
+    -----------
+    Selenium WebDriver is the main and most important component of selenium.
+
+    Why is it better than RC?
+    -------------------------
+    1. Directly communicates with browser
+    2. No server needed
+    3. Faster execution
+    4. Better support for modern websites (HTML5 , CSS# , JavaScript)
+
+    Features
+    --------
+    1. Control browser actions
+    2. Handles alerts and windows
+    3. Navigate pages
+    4. Perform parallel execution
+    5. Rick APIs
+👉 Most used Selenium tool in real-time projects.
+
+4️⃣ Selenium Grid
+    What is it?
+    -----------
+    Selenium Grid allows running tests on multiple machines and browsers at the same time.
+
+    How it works?
+    -------------
+    1. One machine acts as Hub
+    2. Other machines atcs as Nodes
+    3. Tests are sent to Hub -> executed on Nodes
+
+    Benefits
+    --------
+    1. Parallel Testing
+    2. Cross-browser testing
+    3. Test on different OS
+    4. Faster execution
+
+
+
+
+
+
+

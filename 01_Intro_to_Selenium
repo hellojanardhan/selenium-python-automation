@@ -1,0 +1,125 @@
+# What is selenium?
+1. Selenium is an open-source browser automatation tool used to automate web applications.
+2. It supports multiple browsers like Chrome , Firefox ,  and works with programming languages such as python , and java
+3. It is used maninly used for UI Automation testing , expecially functional and regression testing , 
+    and it can be integrated with CI/CD pipelines for continuous automated testing.
+
+Example actions:
+    1. Open a website
+    2. Click buttons
+    3. Enter text
+    4. Submit forms
+    5. Navigate between pages
+
+# Browser support
+Browser supports major browsers
+    1. Chrome
+    2. FireFox
+    3. Microsoft Edge
+    4. Safari
+This helps in cross-browser testing (Checking applications behavior's in different browsers).
+
+# Programming Language support
+Selenium works with multiple programming languages:
+    1. Python
+    2. Java
+    3. C#
+    4. Javascript
+
+We can choose any language based on project requirements.
+In our case , we can use Python selenium
+
+# Uses of Selenium
+1. Automating Repetative Browser Tasks
+    -> Selenium is used to automate repeated manual tasks like:
+        1. Login automation
+        2. Form submission
+        3. Clicking buttons
+        4. Downloading reports
+This saves time and reduces manual effort.
+
+2. Testin Web Applications
+Selenium mainly used to Automation Testing.
+    1. Functional Tesing
+        -> Check if features work correctly
+        Example: Login  , Search , Add to cart
+    2. Regression Testing
+        -> After new changes , verify that old changes still work.
+    3. Basic Performance Observation
+        -> Selenium is not a performance testing tool , but it can help check page behavior during execution
+
+# Web scrapping & Data Extraction
+Selenium can extract data from 
+    1. Dynamic web pages
+    2. Javascript-loaded content
+Useful when normal scrapping tools cannot handle dynamic content.
+
+# CI/CD Integration
+Selenium tests can be integrated with CI/CD pipelines.
+This means
+    1. Tests run automatically after code updates
+    2. Faster feedback
+    3. Improved software quality
+
+
+
+# Important Facts About Selenium
+1. Selenium WebDriver?
+    -> Selenium WebDriver is the main component of selenium.
+    -> It allows us to control web browsers using code.
+    What can it do?
+    ---------------
+    A. Open websites
+    B. Click buttons
+    C. Enter Text
+    D. Navigate between pages
+    E. Simulate real user actions
+👉 In real projects, we mainly use WebDriver for automation.
+
+2. Selenium IDE
+    What is it?
+    --------------
+    1. Selenium IDE is a browser extension (plugin).
+    2. It allows users to :
+        -> Record browser actions
+        -> Automatically generates test scripts
+    Who is it for?
+    --------------
+    1. Beginners
+    2. Quick prototype testing
+    3. Learning basic automation
+
+3. Selenium Grid
+    What is it?
+    -----------
+    1. Parallel execution
+    2. Cross-browser testing
+    3. Faster test execution
+    Example:
+        A. Run tests in Chrome
+        B. Run tests in Firefox
+        C. Tests with different OS
+👉 Useful in large projects.
+
+4. Support Multiple Programs
+Selenium works with:
+    -> Python
+    -> Java 
+    -> C#
+    -> Ruby
+    -> Javascript
+👉 This gives flexibility to choose any language based on project needs.
+
+5. Integrates with Testing Frameworks
+Selenium can integrates with testing frameworks such as :
+    ->pytest(Python)
+    ->JUnit
+    ->TestNG
+    Why is this important?
+    ----------------------
+    Testing frameworks helps in:
+        A. Organizing test cases
+        B. Running multiple tests
+        C. Generating reports
+        D. Managing test Execution
+👉 In real projects, Selenium + Testing Framework = Complete automation setup.
