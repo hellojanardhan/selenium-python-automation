@@ -1,0 +1,117 @@
+# Handling Alert Prompts in Selenium Python
+1️⃣ What is an Alert in Selenium?
+An Alert is a popup message box that appears in the browser to:
+    1. Show information
+    2. Ask for information
+    3. Ask the user to enter input
+
+    Example of alerts
+    -----------------
+    1. Login information
+    2. Delete confirmation
+    3. Warning messages
+
+Since alerts are outside the webpage DOM , Selenium cannot interact with them directly using normal locators. 
+
+2️⃣ Alert Class in Selenium
+Selenium provides an Alert class to handle alerts.
+    from selenium.webdriver.common.alert import Alert
+
+This class allows us to : 
+    1. Accept alert
+    2. Dismiss alert
+    3. Get alert text
+    4. Send input to alert
+
+3️⃣ Alert Methods
+Method & Description
+--------------------
+1. accept() -> Click OK button
+2. dismiss() -> Click Cancel button
+3. send_keys() -> Send input to alert textbox
+4. text -> Gets alert message
+
+4️⃣ Steps to Handle Alert
+1. Open browser
+2. Navigate to webpage
+3. Trigger the alert
+4. Switch to alert
+5. Perform action (accept/dismiss/send_keys)
+
+5️⃣ Example 1 – Accepting an Alert
+from selenium import WebDriver
+from selenium.webdriver.commom.alert import Alert
+import time
+
+driver=WebDriver.FireFox()
+driver.get("https://www.geeksforgeeks.org/")
+time.sleep(10)
+alert=Alert(driver)
+print(alert.text)
+alert.accept()
+driver.quit()
+
+    Explanation:
+    alert=Alert(driver)  # Switches control to the alert popup.
+    alert.text # Retrieves the text message displayed in the alert.
+    alert.accept() # Clicks the OK button to accept the alert.
+
+6️⃣ Example 2 – Dismissing an Alert
+from selenium import WebDriver
+from selenium.webdriver.common.alert import Alert
+driver=WebDriver.FireFox()
+driver.get("https://www.geeksforgeeks.org/")
+alert=Alert(driver)
+alert.dismiss()
+driver.quit()
+
+    Explanation:
+    alert.dismiss() # Clicks the Cancel button to dismiss the alert.
+
+7️⃣ Example 3 – Sending Input to Alert
+from selenium import WebDriver
+from selenium.webdriver.common.alert import Alert
+driver=WebDriver.FireFox()
+driver.get("https://www.geeksforgeeks.org/")
+alert=Alert(driver)
+alert.send_keys("Hello, Geeks!")
+alert.accept()
+    Explanation:
+    alert.send_keys("Hello, Geeks!") # Sends the specified text to the alert's input field.
+    alert.accept() # Clicks the OK button to submit the input.
+
+8️⃣ Types of Alerts
+    1️⃣ Simple Alert
+    Shows message and an OK button.
+
+    Example
+    -------
+    Are you sure Ok?
+    [ OK ]  
+Use alert.accept() to click OK.
+
+    2️⃣ Confirmation Alert
+    Shows message with OK and Cancel buttons.
+
+    Example
+    -------
+    Do you want to delete this item?
+    [ OK ] [ Cancel ]
+
+    USe alert.accept() to click OK and alert.dismiss() to click Cancel.
+
+    3️⃣ Prompt Alert
+    Shows message with input field and OK/Cancel buttons.
+
+    Example
+    -------
+    Please enter your name:
+    [ Input Field ]
+    [ OK ] [ Cancel ]   
+
+    Use alert.send_keys() to enter text, alert.accept() to click OK, and alert.dismiss() to click Cancel.
+
+9️⃣ Important Note
+
+Before performing any action on the alert, you must switch to it using Alert(driver). 
+Otherwise, Selenium will throw a NoAlertPresentException.

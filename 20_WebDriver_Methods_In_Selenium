@@ -1,0 +1,197 @@
+# WebDriver Methods in Selenium
+1️⃣ What is WebDriver in Selenium?
+WebDriver is the main component of selenium used to control web browsers using code.
+Using WebDriver we can:
+    1. Open web pages
+    2. Click buttons
+    3. Enter text
+    4. Navigate between pages
+    5. Execute Javascript
+    6. Handle cookies
+    7. Take Screenshots
+    8. Perform automated testing
+WebDriver acts as an interface between python code and the browser
+
+2️⃣ Creating a WebDriver Object
+Before using selenium , we must create a WebDriver object.
+Each browser has its own WebDriver class.
+Example:
+    1. Chrome -> webdriver.Chrome()
+    2. FireFox -> webdriver.FireFox()
+    3. Edge -> webdriver.Ddge()
+
+Example : FireFox WebDriver
+    from selenium import WebDriver
+
+    # create WebDriver Object
+    driver=WebDriver.FireFox()
+
+    Here:
+        1. WebDriver -> Selenium module
+        2. driver -> controls the browser
+
+3️⃣ Arguments for WebDriver
+When starting WebDriver , we can pass optional arguments to customize browser behavior.
+Argument & Description
+----------------------
+1. desired_capabilities -> Dictionary used to request browser capabilities
+2. browser_profile -> Firefox profile configuration
+3. proxy -> Used to configure proxy settings
+4. keep_alive -> Keeps HTTP connection alive (default False)
+5. file_detector -> Used for detecting file uploads
+6. options -> Browser configuration like headless mode , window size etc..
+
+4️⃣ How to Use WebDriver
+After creating the driver, we can control the browser.
+    Example:
+        from selenium import webdriver
+
+        driver = webdriver.Firefox()
+
+        # Open webpage
+        driver.get("https://www.geeksforgeeks.org/")
+
+        # Execute JavaScript
+        script = "alert('Hello from Selenium!')"
+        driver.execute_script(script)
+    
+        This code:
+
+            1. Opens Firefox
+            2. Opens the website
+            3. Shows a JavaScript alert
+
+5️⃣ WebDriver Methods
+WebDriver provides many methods to control the browser.
+They are categorized into different groups.
+
+6️⃣ Navigation Methods
+Used to navigate between web pages.
+    Method & Description
+    ---------------------
+    1. get(url) -> Opens the specified url
+    2. back() -> Goes back to previous page
+    3. forward() -> Goes forward in history
+    4. refresh() -> Refreshes current page
+    5. set_page_load_timeout(time) -> Sets max time for page load
+
+    Example:
+        driver.get("https://google.com")
+        driver.back()
+        driver.forward()
+        driver.refresh()
+    
+7️⃣ Window Management Methods
+Used to contro browser window size and position.
+    Method & Description
+    --------------------
+    1. maximize_window() -> Maximizes browser
+    2. minimize_window() -> Minimizes browser
+    3. fullscreen_window() -> Makes browser fullscreen
+    4. get_window_size() ->Returns window width and height
+    5. get_window_position() -> Returns window position
+    6. set_window_rect(x , y , width , height) -> Sets window size and position
+    7. set_window_position(x , y) -> Moves window
+    8. get_window_rect() -> Retuns window size and position
+
+    Example:
+        driver.maximize_window()
+    driver.minimize_window()
+
+8️⃣ Element Interaction Methods
+Used to find and interact with elements on a webpage.
+Common actions:
+    1. Find element
+    2. click
+    3. Enter text
+    4. Submit form
+
+    Example:
+        from selenium.webdriver.common.by import By
+        search_box = driver.find_element(By.ID, "search-input")
+        search_box.send_keys("Selenium Python")
+        search_box.submit()
+
+    Explanation:
+
+        1. find_element() → finds element
+        2. send_keys() → enters text
+        3. submit() → submits form
+    
+9️⃣ Cookie Management Methods
+Cookies store user session data.
+Selenium allows us to manager cookies.
+    Method & Description
+    --------------------
+    1. add_cookie() -> Adds cookie
+    2. get_cookie() -> Get cookie by name 
+    3. get_cookies()    -> Get all cookies
+    4. delete_cookies() -> Delete cookie by name
+    5. delete_all_cookies() -> Delete all cookies
+
+    Example:
+        driver.get_cookies()
+        driver.delete_all_cookies()
+    
+🔟 JavaScript Execution Methods
+These methods allows selenium to run javascript code inside the browser.
+    Method & Description
+    --------------------
+    1. execute_script() -> Execute javascript synchrnously
+    2. execute_async_script() -> Executes Javascript asynchronously
+
+Example:
+    driver.execute_script("alert('Hello Selenium')")
+
+1️⃣1️⃣ Screenshot Methods
+Used to capture screenshots of the webpage.
+    Method & Description
+    --------------------
+    1. get_screenshot_as_file() -> Saves SC as PNG file
+    2. get_screenshot_as_png() -> returns SC as binary data
+    3. get_screenshot_as_base64() -> Returns SC as base64 string
+
+    Example:
+        driver.get_screenshot_as_file("page.png")
+    
+1️⃣2️⃣ Session & Page Information Methods
+Used to get browser session and page details.
+    Method & Description
+    --------------------
+    1. current_url -> Reutns current page URL
+    2. title -> Returns page title
+    3. page_source -> Returns HTML source
+    4. current_window_handle -> Retuns current window handle
+    5. quit() -> Closes all browser windows
+    6. close() -> Closes current window
+
+    Example:
+        print(driver.title)
+        print(driver.current_url)
+
+        driver.close()
+        driver.quit()
+
+    Difference:
+    close() → closes current window
+    quit() → closes all browser windows
+
+1️⃣3️⃣ Timeout Methods
+Used to control waiting time in Selenium.
+    Method & Description
+    ---------------------
+    1. implicitly_wait(seconds)	 -> Waits for element to appear
+    2. set_script_timeout(seconds) -> Max time for async JavaScript
+
+    Example:
+        driver.implicitly_wait(10)
+
+1️⃣4️⃣ Advanced Methods
+Used for advanced automation.
+    Method & Description
+    --------------------
+    1. create_web_element()	-> Creates WebElement manually
+    2. get_log()	-> Gets browser logs
+
+    Example:
+        driver.get_log("browser")

@@ -1,0 +1,129 @@
+# Assertions in Selenium
+
+1️⃣ What is Assertion?
+An assertion is used to verify whether the actual result is equal to expected result.
+In Automation testing , assertions help us check if the application is working correctly.
+If the condition is True -> Test pass
+If the condition is False -> Test failed
+
+Example:
+    assert.driver.title == "Google"
+This checks whether the page title is Google or not.
+
+2️⃣ Why Assertions Are Important
+Assertions are used to:
+    1. Validation -> Check if application work correctly
+    2. Test Results -> Decide whether the test passes or fails.
+    3. Bug Detection -> Helps find issues in the application
+    4. Automation Reliability -> Ensures expected behavior
+
+3️⃣ Assertions in Selenium Python
+In Python Selenium , assertions are usually used with:
+    1. Python built-in assert statement
+    2. Testing frameworks like:
+        1. unittest
+        2. pytest
+
+    Most selenium python tests use assert or unittest assertions.
+
+4️⃣ Basic Python Assertion
+    Syntax:
+        assert condition
+    
+    Example:
+        assert 5>3
+    
+    If condition is True -> Pass
+    If condition is False -> AssertionError
+
+5️⃣ Assertion with Message
+You can add custom assertion error message
+    Example:
+        assert driver.title == "Google" , Title does not match"
+    If the title is wrong , the message will be shown.
+
+6️⃣ Common Assertions in Selenium Python
+    1️⃣ Verify Page Title
+    assert driver.title == "Google"
+
+    2️⃣ Verify Element Text
+    text=driver.find_element(By.ID , "welcome").text
+    assert text == "Welcome"
+
+    3️⃣ Verify Element is Displayed
+    element=driver.find_element(By.ID , "login")
+    assert element.is_displayed()
+
+    4️⃣ Verify URL
+    element = driver.find_element(By.LINK_TEXT , "dashboard")
+    assert "dashboard" in driver.current_url
+
+    5️⃣ Verify Element Exists
+    element=driver.find_element("id" , "username")
+    assert element is not None
+
+7️⃣ Example Selenium Script with Assertion
+Example Verify Google title
+
+from selenium import WebDriver
+driver=WebDriver.FireFox()
+driver.get("https://www.google.com")
+assert driver.title == "Google"  , "Title is incorrect"
+driver.quit()
+
+Explanation:
+    1. Open browser
+    2. Go to google
+    3. Check page title
+    4. If title matches -> Test pass
+    5. If title does not match -> Test failed
+
+8️⃣ Assertions using unittest
+Python unittest framework provides more assertion methods.
+Example:
+    import unittest
+    from selenium import WebDriver
+
+    Class TestGoogle(unittest.TestCase):
+        def test_title(self):
+            driver=webdriver.FireFox()
+            driver.get("https://www.google.com")
+
+            self.assertEqual(driver.title , "Google")
+            driver.quit()
+    if __name__ == "__main__":
+        unittest.main()
+
+9️⃣ Common unittest Assertions
+Method & Purpose
+-----------------
+1. assertEqual(a , b) -> Check if values are equal
+2. assertNotEqual(a , b) -> Check values are not equal
+3. assertTrue(x) -> Check condition is True
+4. assertFalse(x) -> Check condition is False
+5. assertIsNone(x) -> Check object is None
+6. assertIsNotNone(x) -> Check object is not None
+
+Example:
+    self.assertTrue(element.is_displayed())
+
+🔟 Real Selenium Test Example
+Login page Validation
+    from selenium import WebDriver
+    
+    driver=WebDriver.FireFox()
+    driver.get("https://example.com/login")
+
+    title=driver.title
+    assert title == "Login Page"
+    driver.quit()
+
+1️⃣1️⃣ Best Practices
+Use clear assertion messages.
+    assert driver.title == "Home" , "Home page not loaded"
+
+Verify important elements
+Do not use too many assertions in one test
+always validate expected results
+
+

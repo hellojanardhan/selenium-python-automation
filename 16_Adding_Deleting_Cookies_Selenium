@@ -1,0 +1,113 @@
+# Adding and Deleting Cookies in Selenium
+
+1️⃣ What are Cookies?
+Cookies are small piece of data store in the browser by websites.
+They store information such as:
+    1. Login session
+    2. User Preferences
+    3. Tracking information
+    4. Authentication data
+
+In selenium Automation , cookies are useful when testing:
+    1. Login sessions
+    2. Authentication
+    3. User personlization
+    4. Sessions Management
+
+2️⃣ Cookie Methods in Selenium
+Selenium WebDriver provides several methods to manage cookies.
+    1. add_cookie() Method
+    -----------------------
+    This method is used to add a cookie to the current browser session.
+    
+    Syntax:
+        driver.add_cookies({"name":"cookie_name","value":"cookie_value"})
+    
+    Example:
+        driver.add_cookie({"name":"foo" , "value":"bar"})
+    
+    Explanation:
+    1. name -> Cookie name
+    2. value -> Cookie value
+
+    This adds a cookie named "foo" with value "bar"
+
+    2. get_cookie() Method
+    -----------------------
+    This method is used to get a specific cookie by its name.
+
+    Syntax:
+        driver.get_cookie("cookie_name")
+
+    Example:
+        driver.get_cookie("foo")
+
+    Output:
+        Returns:
+            1. Cookie details if found
+            2. None if cookie does not exist
+        
+    3. delete_cookie() Method
+    --------------------------
+    This method is used to delete specific cookie.
+
+    Syntax:
+        driver.delete_cookie("cookie_name")
+    
+    Example:
+        driver.delete_cookie("foo")
+    This will remove the cookie named "foo"
+
+    4. get_cookies() Method
+    -----------------------
+    This method is used to get all cookies in the current session
+
+    Syntax:
+        driver.get_cookies()
+    
+    Example:
+        driver.get_cookies()
+    
+    Output:
+        Retuns a list of dictionaries containing all cookies.
+
+        Example:
+            [
+                {"name":"foo" , "value":"bar},
+                {"name":"session_id" , "value":"12345"}
+            ]
+
+3️⃣ Example Workflow (Cookie Handling)
+Typical steps in selenium cookie management:
+    1. Open website
+    2. Add Cookie
+    3. Retrieve Cookie
+    4. Verify Cookie
+    5. Delete Cookie
+
+    Examples:
+        driver.get("https://www.geeksforgeeks.org")
+        driver.add_cookie("name":"foo" , "value":"bar")
+        cookie=driver.get_cookie("foo")
+        driver.delete_cookie("foo")
+
+4️⃣ Practical Uses of Cookies in Automation
+Cookies are used to :
+    1. Authentication Testing
+        Skip login by adding authentication cookies.
+    2. Session Management
+        Maintain user sessions during testing
+    3. Personlization Testing
+        Verify user preferences stored in cookies
+    4. Faster Testing
+        Avoid repeating login steps
+    
+5️⃣ Important Points to Remember
+Cookies work after opening a website domain.
+Example:
+    driver.get("https://example.com")
+    driver.add_cookies({......})
+
+    1. Cookies are stored per browser session
+    2. get_cookie() returns None if cookie doesn't exist
+    3. get_cookies() returns all cookies in list format.

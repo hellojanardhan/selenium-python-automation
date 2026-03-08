@@ -1,0 +1,128 @@
+# Implicit Wait in Selenium Python
+
+1️⃣ Why Waits Are Needed
+Modern web applications use AJAX and dynamic loading.
+This means:
+    1. When a webpage loads , some elements appear later
+    2. Selenium may try to find elements before it loads
+
+If the element not available in the DOM (Document Object Model) , Selenium throws an exceptions like:
+    1. NoSuchElementException
+    2. ElementNotVisibleException
+To handle this issue , selenium provides Waits.
+
+2️⃣ Types of Waits in Selenium
+Selenium provides two types of waits:
+    1. Implicit Wait
+    2. Explicit Wait
+This section explains Implicit Wait.
+
+3️⃣ What is Implicit Wait?
+Implicit wait tells selenium to wait for a certain amount of time while searching for elements.
+If the element is not immediately available , Selenium:
+    1. Keeps checking the DOM
+    2. Until the element appears
+    3. or the maximum time appears
+
+4️⃣ Default Behavior
+By Default:
+    Implicit Wait = 0 seconds
+This means:
+    1. Selenium does not wait
+    2. if element not found -> exception occurs immediately
+
+5️⃣ Syntax
+    driver.implicitly_wait(time_in_seconds)
+
+    Parameter & meaning
+    -------------------
+    driver -> WebDriver Instance
+    time_in_seconds -> Maximum time selenium will wait
+
+    Example
+    -------
+    driver.implcitly_wait(10)
+Selenium will wait up to 10 seconds to find elements.
+
+6️⃣ Important Characteristics
+    1. Applied globally
+    2. Applies to all elements in the script
+    3. Set only once
+    4. Active during the entire WebDriver session
+
+    Example:
+        driver=WebDriver.FireFox()
+        driver.implicitly_wait(10)
+    
+Now every element search will wait up to 10 seconds
+
+7️⃣ Example 1 – Basic Implicit Wait
+
+from selenium import webdriver
+from selenium.common import By
+driver=webdriver.FireFox()
+driver.implicitly_wait(10)
+driver.get("http://somedomain/url_that_delays_loading")
+myDynamicElement=driver.find_element(By.ID , "myDynamicElement")
+
+    Explanation
+    -----------
+    1. selenium opens the browser
+    2. Implicit wait is set to 10 seconds
+    3. Selenium tries to find element myDynamicElement
+    4. If the element appears within 10 seconds , selenium continues
+    5. if not found -> exception occurs
+
+8️⃣ Example 2 – Real Website Example
+
+from selenium import webdriver
+from selenium.common import By
+
+driver=WebDriver.FireFox()
+driver.implcitly_wait(10)
+driver.get("https://www.geeksforgeeks.org/")
+element=driver.find_element(By.LINK_TEXT , "Courses")
+element.click()
+driver.quit()
+
+    Step-by-Step
+    ------------
+    1. Browser opens GeekGorGeeks website
+    2. Selenium waits up to 10 seconds
+    3. It searches for Courses link
+    4. When element appears -> Selenium clicks it
+    5. Browser navigates to Courses Page
+
+9️⃣ How Implicit Wait Works Internally
+    Example
+    driver.implicitly_wait(10)
+
+    selenium will:
+    0 sec -> check element
+    1 sec -> check
+    2 sec -> check
+    3 sec -> check
+    .
+    .
+    10 sec -> check
+
+If the element appears earlier -> Selenium continues immediately.
+
+🔟 Advantages of Implicit Wait
+    1. Simply to use
+    2. Works globally
+    3. Reduce element-not-found errors
+    4. Handles small delays in page loading
+
+11️⃣ Limitations of Implicit Wait
+❌ Applies to all elements even when not required
+❌ Less control compared to Explicit Wait
+❌ Not ideal for complex dynamic elements
+
+12️⃣ Real-Life Example
+Imagine you are waiting for a friend.
+Implicit wait means:
+    I will wait for my friend for 10 minutes , checking continueously.
+
+If your friend arrives in 3 minutes , you leave immediately.
+If not -> you stop waiting for 10 mins. 

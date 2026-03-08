@@ -1,0 +1,216 @@
+# Element Methods in Selenium
+
+1️⃣ What are Element Methods in Selenium?
+Selenium works with web elements on a webpage.
+A web element can be :
+    1. Button
+    2. TextBox
+    3. Link
+    4. CheckBox
+    5. Dropdown
+    6. Any HTML Tag
+
+In Selenium python , every element is represented as an object of :
+    selenium.webdriver.remote.webelement.WebElement
+
+After locating an element , selenium allows to perform different actions and checks using Element Methods
+    Example Actions:
+    1. click()
+    2. enter text
+    3. Get element text
+    4. Check if element is visible
+
+2️⃣ How to Use a Method on an Element
+Before using a method , we must locate an element on the webpage.
+Selenium provides locator strategies like:
+    1. id
+    2. name
+    3. xpath
+    4. css locator
+    5. tagname
+    6. class name
+    7. link text
+
+    Syntax:
+        element.method_name
+
+3️⃣ Example HTML Element
+Example:
+    <input type="text" name="passwd" id="passwd-id" />
+
+4️⃣ Locating an Element
+Examples:
+    element = driver.find_element_by_id("passwd-id")
+    element = driver.find_element_by_name("passwd")
+    element = driver.find_element_by_xpath("//input[@id='passwd-id']")
+
+5️⃣ Locating Multiple Elements
+To find multiple elements:
+    elements = driver.find_elements_by_name("passwd")
+This returns a list of elements.
+
+6️⃣ Using Element Methods
+Once the element is located:
+    element.method_name
+
+    Example:
+        element.click()
+        element.send_keys("Hello")
+    
+7️⃣ Element Methods in Selenium Python
+    1. is_selected()
+    ----------------
+    Checks whether the element is selected or not.
+    Used mainly for:
+        1. Checkbox
+        2. Radio button
+
+    Returns:
+        True or False
+    
+    Example:
+        element.is_selected()
+    
+    2. is_displayed()
+    -----------------
+    Check whether the element is displayed or not.
+    Returns:
+        True or False
+
+    Example:
+        element.is_displayed()
+    
+    3. is_enabled()
+    ---------------
+    Check whether the element is enabled or disabled.
+    Returns:
+        True or False
+
+    Example:
+        element.is_enabled()
+
+    4. get_property()
+    -----------------
+    Get the property value of an element.
+    Example:
+        Getting the text_length property of an anchor tag.
+    
+    Example:
+        element.get_property("text_length")
+    
+    5. get_attribute()
+    ------------------
+    Get the attribute value of an element.
+    Example:
+        Getting href attribute of a link.
+
+    Example:
+        element.get_attribute("href")
+    
+    6. send_keys()
+    --------------
+    Used to enter the text into input fields.
+
+    Example Uses:
+        1. TextBox
+        2. Form input
+        3. password field
+    
+    Example:
+        element.send_keys("password123")
+    
+    7. click()
+    ----------
+    Used to click an element.
+    Examples:
+        1. Button
+        2. Link
+        3. Checkbox
+    
+    Example:
+        element.click()
+    
+    9. screenshot()
+    ---------------
+    Used to take screenshot of the element and save it as a PNG file.
+    Example:
+        element.screenshot("image.png")
+    
+    10. submit()
+    ------------
+    Used to submit a form after entering the data.
+    Example:
+        element.submit()
+    
+    11. value_of_css_property()
+    ---------------------------
+    Used to get the value of css property of an element.
+    Example:
+        element.value_of_css_property("color")
+    
+    12. location
+    -------------
+    Used to get the location of the element on the page.
+    Example:
+        element.location
+    
+    Output example:
+        {'x': 100, 'y': 200}
+    
+    13. screenshot_as_png
+    ---------------------
+    Get the screenshot of the element as binary data(PNG format)
+    Example:
+        element.screenshot_as_png
+    
+    14. parent
+    ----------
+    Used to get the webDriver instance that found this element.
+    Example:
+        element.parent
+    
+    15. size
+    --------
+    Used to get the size of the element.
+    Example:
+        element.size
+    
+    Output example:
+        {'height': 40, 'width': 2}
+    
+    16. tag_name
+    ------------
+    Get the HTML tag name of the element.
+    Example:
+        element.tag_name
+
+    Output example:
+        input
+    
+    17. text
+    --------
+    Get the visible text of the element.
+    Example:
+        element.text
+    
+    18. rect
+    --------
+    Returns a dictionary containing location and size of the element.
+    Example:
+        element.rect
+    
+    Output Examples:
+        {
+        'x': 100,
+        'y': 200,
+        'width': 150,
+        'height': 40
+        }
+    
+    19. screenshot_as_base64
+    -------------------------
+    Get the screenshot of the element as a Base64 encoded string.
+    Examples:
+        element.screenshort_as_base64
+    
+    

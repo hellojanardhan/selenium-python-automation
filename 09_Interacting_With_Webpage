@@ -1,0 +1,56 @@
+# Interacting with WebPage
+1️⃣ What Does “Interacting with Webpage” Mean?
+In selenium , Interation means:
+    -> Finding HTML elements
+    -> Clicking buttons
+    -> Typing text
+    -> Submitting forms
+    -> Handling popups /iframes
+    -> Extracting data
+
+Opening a website using get() is just the beginning.
+The real automation starts when we interact with elements.
+
+2️⃣ Step 1 – Locate Elements
+Before interacting, we must find the element.
+Example HTML:
+    <input type="text" name="passwd" id="passwd-id" />
+
+Different Locator Strategies
+    element = driver.find_element(By.ID, "passwd-id")
+    element = driver.find_element(By.NAME, "passwd")
+    element = driver.find_element(By.XPATH, "//input[@id='passwd-id']")
+
+To Find Multiple Elements:
+    elements = driver.find_elements(By.NAME, "passwd")
+
+To Find Link by Text:
+    element = driver.find_element(By.LINK_TEXT, "Link Text")
+
+⚠ Important Notes
+1. If element not found → NoSuchElementException
+2. If multiple elements match → first element is returned
+3. Be careful while using XPath
+
+3️⃣ After Locating an Element – What Can We Do?
+✅ Type Text
+    element.send_keys("some text")
+
+✅ Press Keyboard Keys
+    from selenium.webdriver.common.keys import Keys
+    element.send_keys(Keys.ARROW_DOWN)
+
+✅ Clear Text Field
+    element.clear()
+
+✅ Click Element
+    element.click()
+
+4️⃣ Handling Iframes
+Sometime elements are inside the iframe
+
+Before interacting, we must switch to iframe:
+    driver.switch_to.frame(iframe_element)
+
+After finishing:
+    driver.switch_to.default_content()

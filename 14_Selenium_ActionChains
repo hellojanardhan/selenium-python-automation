@@ -1,0 +1,170 @@
+# Action Chains in Selenium Python
+
+1️⃣ What are Action Chains?
+Actions Chains in selenium are used to peform advanced user interactions on a webpage.
+These include actions like:
+    1. Mouse hover
+    2. Right click
+    3. Doubt click
+    4. Drag and Drop
+    5. Keyboard actions
+    6. Click and Hold
+
+These actions simulate real user behaviour on the browser.
+    Example
+    -------
+    1. Hover over a menu to show a dropdown
+    2. Drag an element to another location
+    3. Right-click to open context menu
+
+2️⃣ Why do we use Action Chains?
+Normal selenium commands like:
+    1. click()
+    2. send_keys()
+    works for simple actions.
+    But for complex mouse or Keyboard actions , we use Action Chains.
+
+    Example
+    -------
+    Hover over a menu -> then click submenu
+    This cannot be done using normal click.
+
+3️⃣ How Action Chains Work
+ActionChains works in 3 steps:
+    1. Create ActionChains Object
+    2. Store actions in queue
+    3. Execute actions using perform()
+
+    ⚡Important Point
+    -----------------
+    Actions is execute only after perform() is called.
+
+4️⃣ How to Create Action Chain Object
+from selenium import webdriver
+from selenium.common import By
+from selenium.webdriver.commom.action_chain import ActionChains
+
+driver=WebDriver.FireFox()
+actions=ActionChains(driver)
+
+    Here
+    ----
+    1. ActionChains creates an action object
+    2. We use this object to perform advanced options
+
+5️⃣ Example 1 – Click an Element Using Action Chains
+from selenium import WebDriver
+from selenium.common import By
+from selenium.webdriver.common.action_chains import ActionChains
+
+driver=WebDriver.FireFox()
+driver.get("https://www.geeksforgeeks.org/)
+element=driver.find_element(By.LINK_TEXT , "Courses")
+actions=ActionChains(driver)
+actions.click(element).perform()
+
+    What happens here?
+    ------------------
+    1. Browser opens GeekForGeeks
+    2. Selenium find Courses Link
+    3. ActionChains clicks the element
+    4. perform() execute the action
+
+6️⃣ Example 2 – Mouse Hover
+Some menus appear only when you hover the mouse
+
+    Example
+    -------
+    menu=driver.find_element(By.ID , "menu")
+    actions=ActionChains(driver)
+    actions.move_to_element(menu).perform()
+    
+    What happens here?
+    ------------------
+    1. Mouse moves over the element
+    2. Hidden menu becomes visible
+
+7️⃣ Example 3 – Drag and Drop
+
+    Example
+    source=driver.find_element(By.ID , "drag")
+    destination=driver.find_element(By.ID , "drop")
+
+    actions = ActionChains(driver)
+    actions.drag_and_drop(sourcr , target).perform()
+
+    What happends here?
+    -------------------
+    1. Clicks and holds the element
+    2. Moves to target
+    3. Releases the mouse
+
+8️⃣ Two Ways to Use Action Chains
+
+    Method 1 - Chain Pattern
+    ------------------------
+    ActionChains(driver).move_to_element(menu).click(submenu).perform()
+
+    All actions written in one line.
+
+    Method 2 - Queue pattern
+    ------------------------
+    actions = ActionChains(driver)
+    actions.move_to_element(menu)
+    actions.click()
+    actions.peroform()
+
+    Actions are store first , then executed.
+
+9️⃣ Important Action Chain Methods
+Method & Description
+---------------------
+1. click() -> Clicks an element
+2. double_click() -> Double clicks an element
+3. context_click() -> Right click
+4. click_and_hold() -> Hold mouse button
+5. release() -> Release mouse button
+6. move_to_element() -> Hover over element
+7. move_by_offset() -> Move mouse by coordinates
+8. drag_and_drop() -> Drag element to another
+9. key_down() -> Press key without releasing
+10. key_up() -> Release Key
+11. send_keys() -> send keyboard input
+12. pause() -> Pause actions
+13. perform() -> Execute all actions
+
+🔟 Real Time Example (Hover Menu)
+Imagine a website menu like:
+    Products -> mobiles , laptops 
+
+    Steps
+    -----
+    1. Hover products
+    2. Click laptop
+
+    from selenium import WebDriver
+    from selenium.common import By
+    from selenium.webdriver.commom.action_chains import ActionChains
+
+    driver=WebDriver.FireFox()
+    products=driver.find_element(By.ID  , "Products")
+    laptops = driver.find_element(By.Id , "laptops)
+
+    actios=ActionChains(driver)
+    actions.move_to_element(products)
+    actions.click(laptops)
+    actions.perform()
+
+1️⃣1️⃣ Key Points to Remember
+1. Used for advanced mouse and keyboard actions
+2. Stores actions in queue
+3. Executes using perform()
+4. Useful for:
+    1. Hover mouse
+    2. Drag & Drop
+    3. Right Click
+    4. Double Click
+
+
+
+

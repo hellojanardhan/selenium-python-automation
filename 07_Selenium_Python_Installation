@@ -1,0 +1,54 @@
+✅ Selenium Python Installation Guide
+
+1. Install Python 
+    -> Go to official website https://www.python.org/
+    -> Download the latest and stable version
+    -> IMPORTANT , while installing "ADD Python to PATH" 
+    -> Click install now
+
+    Verify Installation now
+    ------------------------
+    python --version or py --version
+
+2. Installation Selenium using pip
+
+    -> pip install selenium or py -m pip install selenium (m-> multiple python Installations)
+        
+        Verify selenium Installation
+        ----------------------------
+        pip show selenium -> should show the selenium package version
+
+3. Install a browser 
+    -> Chrome
+    -> FireFox
+    -> Edge
+4. WebDriver Setup
+    Using selenium Manager
+    ----------------------
+    If you installed latest Selenium, it automatically downloads driver.
+
+    Example:
+    from selenium import WebDriver
+    driver=WebDriver.FireFox()
+    driver.get("https://www.google.com")
+
+    👉 No manual driver downloaded
+
+5. Run a sample script
+    -> Create a file: test.py
+
+    test.py
+    -------
+    from selenium import webdriver
+
+    driver = webdriver.Chrome()
+    driver.get("https://www.google.com")
+    print(driver.title)
+    driver.quit()
+
+    Run:
+    ---
+    python test.py
+    
+If browser opens → ✅ Installation successful
+

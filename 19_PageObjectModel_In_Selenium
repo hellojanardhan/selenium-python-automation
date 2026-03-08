@@ -1,0 +1,197 @@
+# Page Object Model (POM) in Selenium
+
+1️⃣ What is Page Object Model (POM)?
+Page Object Model (POM) is a design pattern is used in selenium automation to organize test code.
+In POM:
+    1. Each web page is represented as a separate class.
+    2. Web Elements and methods are stored inside that class.
+This makes the automation code clean , reusable , and easy ti maintain.
+
+Simple definition
+-----------------
+-> POM is a design pattern where each webpage is represented as a class containing elements and actions of that page
+
+2️⃣ Why Use POM?
+Without POM , Selenium code becomes messy and hard to maintain.
+Example Proble:
+---------------
+If a locator changes , we must update it in many places.
+
+Using POM , 
+    1. Locators are stored in one place.
+    2. It something changes , update only once.
+
+Benefits:
+    1. Code is Organized
+    2. Reusable code
+    3. Easy maintenance
+    4. Better readbability
+    5. Reduce duplication
+
+3️⃣ Structure of POM
+In selenium Python , Usually we create:
+    project
+    │
+    ├── pages
+    │      login_page.py
+    │      home_page.py
+    │
+    ├── tests
+    │      test_login.py
+    │
+    └── driver_setup.py
+
+    Explanation:
+        Folder & Purpose
+        ----------------
+        1. Pages -> Contains page classes
+        2. tests -> Contain test scripts
+        3. driver_setup -> Browser setup
+    
+4️⃣ Example Without POM (Normal Selenium Script)
+    from selenium import webdriver
+    from selenium.webdriver.common.by import By
+
+    driver = webdriver.Chrome()
+
+    driver.get("https://example.com/login")
+
+    driver.find_element(By.ID,"username").send_keys("admin")
+    driver.find_element(By.ID,"password").send_keys("1234")
+    driver.find_element(By.ID,"login").click()
+
+Problem:
+    ❌ Locators inside test script
+    ❌ Difficult to maintain
+
+5️⃣ Example With POM
+Step1: Create Page class
+------------------------
+    login_page.py
+    -------------
+
+    from selenium.webdriver.common.by import By
+    class LoginPage:
+
+        def __init__(self, driver):
+            self.driver = driver
+
+        username = (By.ID,"username")
+        password = (By.ID,"password")
+        login_button = (By.ID,"login")
+
+        def enter_username(self, username):
+            self.driver.find_element(*self.username).send_keys(username)
+
+        def enter_password(self, password):
+            self.driver.find_element(*self.password).send_keys(password)
+
+        def click_login(self):
+            self.driver.find_element(*self.login_button).click()
+    
+Step 2: Create Test Script
+--------------------------
+    test_login.py
+    -------------
+    from selenium import webdriver
+    from pages.login_page import LoginPage
+
+    driver = webdriver.Chrome()
+
+    driver.get("https://example.com/login")
+
+    login = LoginPage(driver)
+
+    login.enter_username("admin")
+    login.enter_password("1234")
+    login.click_login()
+
+    driver.quit()
+
+6️⃣ How POM Works
+    FLOW:
+        Test Script
+        ↓
+        Page Class
+            ↓
+        Web Elements
+            ↓
+        Browser Action
+
+    Example:
+        test_login.py
+        ↓
+        login_page.py
+            ↓
+        find_element()
+            ↓
+        browser interaction
+
+7️⃣ Important Components of POM
+    1️⃣ Page Class
+    Represents a webpage
+    Example:
+        class LoginPage
+    
+    2️⃣ Web Elements (Locators)
+    Stored inside the class
+    Example:
+        username = (By.ID , "username")
+    
+    3️⃣ Page Methods
+    Actions performed on elements
+    Example:
+        def click_login(self):
+    
+    4️⃣ Test Script
+    Calls page methods to perform test steps.
+    Example:
+        login.enter_username("admin")
+    
+8️⃣ Advantages of POM
+    1. Easy maintenance
+        -> If locator changes ,Update only in page class
+    2. Code Reusability
+        -> Methods can be reused in multiple class.
+    3. Better Readability
+        -> Test script becomes simple.
+        Example:
+            login.enter_username()
+            login.enter_password()
+            login.click_login()
+    4. Reduced code Duplication
+        -> Locators are written only once.
+
+9️⃣ Real World Example
+    Suppose a website has pages:
+    Login Page
+    Home Page
+    Profile Page
+
+    POM Structure:
+        pages
+        login_page.py
+        home_page.py
+        profile_page.py
+
+        tests
+        test_login.py
+        test_profile.py
+
+    Each page has its own class
+
+🔟 Simple Real-Time Flow
+    Example: Login Test
+
+    Steps:
+    1. Open browser
+    2. Open login page
+    3. Enter username
+    4. Enter password
+    5. Click login
+    6. Verify login success
+
+    Using POM:
+        Test Script → LoginPage Class → Browser
+
+

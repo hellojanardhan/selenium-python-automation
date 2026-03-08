@@ -1,0 +1,165 @@
+# Selenium Locating Strategies
+1️⃣ What are Selenium Locating Strategies?
+Selenium locating strategies are methods used to identify and locate web elements on a webpage.
+Before performing actions like:
+    1. Clicking a button
+    2. Entering a text in a box
+    3. Selecting a dropdown
+    4. Submitting a form
+
+Selenium must find the element in the webpage DOM.
+To do this, selenium provides different locator strategies.
+
+2️⃣ Why Locators are Important?
+Locators help selenium interact with webpage element.
+Without locators selenium cananot perform actions like:
+    1. click()
+    2. send_keys()
+    3. clear()
+    4. submit()
+
+Example:   
+    element = driver.find_element(By.ID, "username")
+    element.send_keys("admin")
+
+Here Selenium first locates the element and then performs an action.
+
+3️⃣ Selenium Provides 7 Locator Strategies
+Selenium Provides the following 7 ways to locate elements.
+    1️⃣ Locating Element By ID(By.ID)
+    The ID attribute uniquely identifies an element in a webpage
+    Because ID is unique, it is fastest and more reliable locator.
+    Example HTML:
+        <input type="text" id="username">
+    
+    Selenium Code:
+        byId=driver.find_element(By.ID , "username")
+    
+    Advantages:
+    -----------
+    1. Fastest locator
+    2. Unique element identification
+    3. Recommanded whenever available
+    
+    2️⃣ Element By Class Name(By.CLASS_NAME)
+    Class name is used for styling the elements
+    Multiple elements can share the same class name
+    Example HTML:
+        <button class="login-btn">Login</button>
+    
+    Selenium Code:
+        byClassName=driver.find_element(By.CLASS_NAME , "login-btn")
+    
+    NOTE:
+        Class names may not always be unique.
+
+    3️⃣ Locating Element By Name (By.NAME)
+    The name attribute commonly used in forms
+    Example HTML:
+        <input type="text" name="email">
+    
+    Selenium Code:
+        byName= driver.find_element(By.NAME , "email")
+    
+    Used mostly for:
+    ----------------
+    1. input fields
+    2. radio buttons
+    3. form elements
+
+    4️⃣ Locating Element By Tag Name (By.TAG_NAME)
+    Every HTML element has a tag name
+    Common tags include:
+    1. input
+    2. div
+    3. p
+    4. button
+    5. select
+    
+    Example HTML
+        <button type="submit" name="login">
+    
+    Selenium Code:
+        byTagName=driver.find_element(By.TAGNAME , "button")
+    
+    Useful when:
+    ------------
+    1. Locating multiple elements
+    2. Performing operations on groups
+
+    Selenium Code:
+        ByTagName=driver.find_elements(By.TAGNAME , "input")
+    
+    5️⃣ Locating Element By CSS Selector (By.CSS_SELECTOR)
+    CSS selectors are patterns used to select HTML elements.
+    They are faster than XPATH
+    Example HTML
+        <div class="title">Welcome</div>
+    
+    Selenium Code:
+    byCssSelector=driver.find_element(By.CSS_SELECTOR , "div.title")
+
+    Common CSS selectors:
+    ---------------------
+    Selector & Example
+    Tag  -> input
+    Class -> .btn
+    ID -> #header
+    Descendant -> div p
+
+    6️⃣ Locating Element By XPath(By.XPATH)
+    XPATH is used to navigate through the HTML DOM structure.
+    It can locate elements using:
+    1. attributes
+    2. relationships
+    3. positions
+    
+    Selenium Code:
+        element = driver.find_element(By.XPATH, "//input[@id='username']")
+    
+    Advantages:
+    -----------
+    1. Very powe4full
+    2. Can locate complex elements
+
+    Disadvantages:
+    --------------
+    Slighly slower than CSS selectors
+
+    7️⃣ Locating Element By Link Text (By.LINK_TEXT)
+    This locator is used to find hyperlinks (<a> tags) using the exact text.
+    Example HTML:
+        <a href="#">Learn More</a>
+
+    Selenium Code:
+        element = driver.find_element(By.LINK_TEXT, "Learn More")
+
+
+    8️⃣ Locating Element By Partial Link Text
+    Used when we only know part of the link text.
+    Example HTML:
+        <a href="#">Click here to register</a>
+    
+    Selenium Code:
+        element = driver.find_element(By.PARTIAL_LINK_TEXT, "Click")
+    
+    Useful when:
+        1. link text is dynamic
+        2. link text is very long
+    
+    Exception in Locating Elements
+    If Selenium cannot find the element , it throws an exception. -> NoSuchElementException
+    Example:
+        from selenium.common import NoSuchElementException
+    
+    Best Locator Priority (Recommended Order)
+    When writing automation scripts , use locator in this order.
+    1. ID
+    2. NAME
+    3. CSS SELECTOR
+    4. XPATH
+    5. CLASS NAME
+    6. TAG NAME
+    7. LINK TEXT
+
+    

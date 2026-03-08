@@ -1,0 +1,146 @@
+# Explicit Waits in Selenium Python
+
+1️⃣ Why Waits Are Needed in Selenium
+Modern web applications uses AJAX and dynamic loading.
+This means:
+    1. When a webpage opens , all elements do not load immediately
+    2. Some elements load after few seconds.
+
+Example:
+    1. Login button apprears after page loads
+    2. Search results appears after API response
+    3. Dropdown options load dynamically
+
+    If selenium tried to locate an elements before it loads , it will throw an error such as:
+    1. NoSuchElementException
+    2. ElementNotVisibleException
+
+To solve this problem , selenium uses waits.
+
+2️⃣ Types of Waits in Selenium
+Selenium provides TWO types of waits.
+1. Implicit wait
+    -> Applies to the entire script
+    -> Selenium waits globally before locating elements
+
+2. Explicit wait
+    -> Applies to the specific elements
+    -> Waits until a particular condition is met
+
+3️⃣ What is Explicit Wait?
+Explicit wait tells selenium:
+    Wait until a speific condition occurs before continuing the program
+
+    Example:
+        1. Wait until element appears
+        2. Wait until element is visible
+        3. Wait until element is clickable
+        4. Wait until page title changes
+
+Instead of waiting a fixed time , selenium waits only as long as needed.
+
+4️⃣ How Explicit Wait Works
+Explicit wait uses TWO Things.
+    1. WebDriverWait
+    2. Expected Conditions
+
+    Syntax:
+    -------
+    WebDriverWait(driver , time).until(condition)
+
+    Example:
+    --------
+    element=WebDriverWait(driver , 10).until(
+        EC.presence_of_element_located(By.ID , "myDynamicElememt)
+    )
+
+    Explanation:
+    ------------
+    1. Selenium waits maximum 10 seconds
+    2. It checks every 500 milliseconds
+    3. As soon as the element appears , execution continues.
+
+If the element is not found in 10 seconds, 
+❌ TimeoutException is raised.
+
+5️⃣ Example Code
+
+from selenium import webdriver
+from selenium.webdriver.common import By
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_condition as EC
+
+driver=webdriver.FireFox()
+driver.get("https://www.geeksforgeeks.org/")
+element=WebDriverWait(driver , 10).until(EC.presence_of_element_located(By.LINK_TEXT , "Courses"))
+element.click()
+
+    Step-by-Step Flow
+    -----------------
+    1. Browser opens GeekForGeeks page
+    2. Selenium waits up to 10 seconds
+    3. It searches for courses link
+    4. When the element appears
+    5. Selenium clicks the element
+
+6️⃣ Common Expected Conditions
+Some commonly used conditions:
+Condition & purpose
+--------------------
+    1. title_is -> waits until title matches
+    2. title_contains -> Waits until contains text
+    3. presence_of_element_located -> waits until element exists in DOM
+    4. visibility_of_element_located -> Waits until elment is visible
+    5. presence_of_all_elements_located -> Waits until multiple elements appear
+    6. element_to_be_clickable -> Waits until element is clickable
+    7. alert_is_present -> Waits until alert popups appears
+
+    Example:
+        EC.element_to_be_clickable((By.ID, "login"))
+    
+7️⃣ Default Polling Time
+WebDriverWait checks conditio every:
+    ⏱ 500 milliseconds (0.5 seconds)
+
+    Example timeline:
+    -----------------
+    0 sec -> check
+    0.5 sec -> check
+    1.0 sec -> check
+    1.5 sec -> check
+
+    Until:
+    -----
+    ✔ Condition becomes true
+    OR
+    ❌ timeout occurs
+
+8️⃣ Explicit Wait vs sleep()
+    time.sleep()
+        time.sleep(10)
+
+    Problems:
+    --------
+    Always waits full 10 seconds
+    Slows automation
+
+    ExplicitWait()
+    WebDriverWait(driver , 10)
+
+    Advantages:
+    -----------
+    1. waits only until element appears
+    2. faster execution
+    3. better automation practice
+
+9️⃣ Advantages of Explicit Wait
+    1. Handles dynamic web elements
+    2. Improves test reliablity
+    3. Aviods unnecessary delays
+    4. Prevent element not found errors
+
+🔟 Simple Real-Life Example
+Imagine Ordering food online:
+    . If the restaurant takes 3 seconds to confirm order
+Using slee(10) -> still waits 10 seconds
+Using ExplicitWait -> you continue as soon as the order is confirmed(3 seconds)

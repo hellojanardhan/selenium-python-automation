@@ -1,0 +1,127 @@
+# Locating Multiple Elements in Selenium
+1️⃣ What is Locating Multiple Elements?
+In Selenium , We use locator strategies to find elements on a webpage.
+When we want:
+    1. All button
+    2. All links
+    3. All Input fields
+    4. All Items in a list
+We use :
+    driver.find_elements()
+
+👉 Notice: find_elements (plural). It returns a list of elements.
+
+2️⃣ Difference Between find_element and find_elements
+Method & Element
+
+find_element() -> Single element
+find_elements() -> Multiple elements
+
+Example:
+    elements = driver.find_elements(By.NAME, "username")
+    print(len(elements))
+
+3️⃣ 7 Locator Strategies to Find Multiple Elements
+Selenium supports 7 ways to locate elements:
+    1️⃣ By.NAME
+    Finds all elements with matching name attributes
+    driver.find_elements(By.NAME, "username")
+
+    Example HTML:
+        <input name="username">
+        <input name="username">
+✔ Both elements will be returned.
+
+    2️⃣ By.XPATH
+    Finds elements using XPath pattern.
+    driver.find_elements(By.XPATH, "//form[1]")
+
+    ✔ Useful when ID or name not available
+    ⚠ Be careful – complex XPath can break easily.
+
+    3️⃣ By.LINK_TEXT
+    Finds links with exact text.
+    driver.find_elements(By.LINK_TEXT, "Continue")
+
+    Example:
+        <a href="continue.html">Continue</a>
+    ✔ Text must match exactly.
+
+    4️⃣ By.PARTIAL_LINK_TEXT
+    Finds links using partial text.
+    driver.find_elements(By.PARTIAL_LINK_TEXT, "Conti")
+
+    ✔ Matches "Continue"
+    ✔ Useful when full text is long.
+
+    5️⃣ By.TAG_NAME
+    Finds elements by HTML tag.
+    driver.find_elements(By.TAG_NAME, "h1")
+
+    Example:
+        <h1>Welcome</h1>
+        <h1>About</h1>
+    
+    6️⃣ By.CLASS_NAME
+    Finds elements by class attribute.
+    driver.find_elements(By.CLASS_NAME, "content")
+
+    Example:
+        <p class="content">Text</p>
+    
+    ✔ Returns all elements with class="content"
+    ⚠ If multiple class names exist, use only one class.
+
+    7️⃣ By.CSS_SELECTOR
+    Finds elements using CSS selector.
+    driver.find_elements(By.CSS_SELECTOR, "p.content")
+
+    ✔ Very powerful
+    ✔ Cleaner than XPath
+    ✔ Preferred in modern automation
+
+4️⃣ Important Notes
+🔹 Deprecated Methods
+    Old methods like:
+    find_elements_by_name()
+    find_elements_by_xpath()
+    ❌ Deprecated in Selenium 4
+
+    ✔ Use new syntax:
+        driver.find_elements(By.NAME, "value")
+
+🔹 What Happens If No Element Found?
+    find_elements()
+    ✔ Returns empty list []
+    ❌ Does NOT raise exception
+
+    But find_element()
+    ❌ Raises NoSuchElementException
+
+5️⃣ Example Usage
+    from selenium import webdriver
+    from selenium.webdriver.common.by import By
+
+    driver = webdriver.Chrome()
+    driver.get("https://example.com")
+
+    elements = driver.find_elements(By.TAG_NAME, "a")
+
+    for element in elements:
+        print(element.text)
+
+    driver.quit()
+
+    ✔ Opens page
+    ✔ Finds all links
+    ✔ Prints link text
+
+6️⃣ When to Use Multiple Elements?
+
+    -> Use find_elements() when:
+        1. Validating number of items
+        2. Working with tables
+        3. Handling dropdown options
+        4. Clicking multiple similar buttons
+        5. Extracting list data
+    

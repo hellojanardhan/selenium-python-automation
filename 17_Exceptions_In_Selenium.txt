@@ -1,0 +1,114 @@
+# Exceptions in Selenium
+1️⃣ What are Exceptions?
+An Exception is an error that occurs during program execution.
+In Selenium , exceptions occurs in:
+    1. Element is not found
+    2. Element is hidden
+    3. Element can not be clicked
+    4. Page takes too long to load
+    5. Alert or frame does not exist
+
+These errors stop the program execution unless they are handled
+
+2️⃣ Why Exceptions Occur in Selenium
+Exceptions happen due to:
+    1. Wrong locators
+    2. Element not loaded yet
+    3. Element is hidden or disabled
+    4. Popup or overlay blocking the element
+    5. Page taking too long to load
+
+3️⃣ Common Selenium Exceptions
+    1. NoSuchElementException
+    This occurs when selenium cannot find element in the DOM
+    Reason:
+        1. Wrong locator
+        2. Element not present
+        3. Page not fully loaded
+    
+    Example:
+        from selenium import WebDriver
+        from selenium.webdriver.common import By
+        driver=driver.FireFox()
+        driver.get("https://www.geeksforgeeks.org/")
+        driver.find_element(By.ID , "abc")
+    
+    Result:
+        Exception occurs because "abc" link does not exist
+    
+    2. ElementClickInterceptedException
+    This occurs when another element block the click action.
+    Example:
+        1. Popup
+        2. Advertisement
+        3. Banner
+        4. overlay
+    
+    Example:
+        element = driver.find_element(By.LINK_TEXT, "Data Structures")
+        element.click()
+    
+    Reason:
+        another element is covering the button , so selenium cannot click it.
+    
+    3. ElementNotInteractableException
+    This occurs when:
+        1. Element exists in DOM
+        2. But it cannot be interacted with 
+    Example situations:
+        1. Element is hidden
+        2. Element is disabled
+        3. Element is not visiable
+    
+    Example:
+        hidden_input.send_keys("Hello")
+    If the input is hidden , then selenium throws this exception.
+
+    4. ElementNotSelectableException
+    This occurs when selenium tries to select a disabled option in dropdown.
+
+    Example:
+        <option value="banana" disabled>Banana</option>
+    
+    Example:
+        dropdown.select_by_value("banana")
+    Since banana option is disabled , Selenium throws an exception.
+
+4️⃣ Other Important Selenium Exceptions
+Here are commonly used selenium exceptions.
+    Exception & Description
+    ------------------------
+    1. NoSuchElementException -> Element not found in webpage
+    2. ElementClickInterceptedException -> Another element blocks the click
+    3. ElementNotInteractableException -> Element exists , but cananot be interacted with 
+    4. ElementNotSelectableException -> Trying to select a disabled element
+    5. NoAlertPresentException -> Alert is not present
+    6. NoSuchFrameException -> Frame not found
+    7. NoSuchWindowException -> Window not found
+    8. TimeoutException -> Page or element took too long to load
+    9. StaleElementReferenceException -> Element is no longer attached to DOM
+    10. InvalidSelectorException -> Wrong locator syntax
+
+5️⃣ Example of Handling Exceptions
+Exceptions can be handled by using try-except block.
+
+    Example:
+        from selenium.common.exceptions import NoSuchElementException
+
+        try:
+            driver=driver.find_element(Buy.ID , "login")
+            element.click()
+        except NoSuchElementException:
+            print("Element not found")
+        
+    Explanation:
+        1. try -> Code that may cause exception
+        2. except -> handles the error
+    
+6️⃣ Why Exceptions Are Important in Automation
+Handling exceptions helps to:
+    1. Prevent test failures
+    2. Make automtion scripts stable
+    3. Handle dynamic web elements
+    4. Improve test reliability
+
