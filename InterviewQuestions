@@ -716,3 +716,83 @@ Method & Purpose
 - Code Reusability → Methods reusable across scripts
 - Better Readability → Test script becomes simple
 - Reduced Duplication → Locators written only once
+
+88. What is the difference between driver.close() and driver.quit()?
+- driver.close() → Closes the current browser tab/window only.
+- driver.quit() → Closes all browser windows and ends WebDriver session.
+- Use driver.close() for single tab; driver.quit() at the end of the test.
+
+89. What is the difference between find_element and find_elements?
+- find_element() → Returns a single element. Raises NoSuchElementException if not found.
+- find_elements() → Returns a list of elements. Returns empty list [] if none found.
+- Use find_element for single element; find_elements for multiple matches.
+
+90. How do you handle StaleElementReferenceException?
+- Occurs when an element reference becomes outdated due to DOM updates.
+- Solutions:
+  - Re-find the element before interacting.
+  - Use Explicit Waits until element is refreshed/visible.
+- Example:
+  element = WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.ID, "username")))
+  element.click()
+
+91. What is the difference between Absolute XPath and Relative XPath?
+- Absolute XPath: /html/body/div[1]/input → starts from root, brittle.
+- Relative XPath: //input[@id='username'] → starts anywhere, flexible, recommended.
+
+92. What is Shadow DOM and how to handle it in Selenium?
+- Shadow DOM → Hidden DOM inside web components; Selenium cannot access directly.
+- Access using JavaScript:
+  shadow_root = driver.execute_script('return arguments[0].shadowRoot', element)
+  shadow_element = shadow_root.find_element(By.CSS_SELECTOR, 'button')
+  shadow_element.click()
+
+93. How do you take a screenshot in Selenium?
+- driver.save_screenshot("screenshot.png")
+- driver.get_screenshot_as_file("screenshot.png")
+
+94. How do you scroll a page using Selenium?
+- Scroll to bottom:
+  driver.execute_script("window.scrollTo(0, document.body.scrollHeight)")
+- Scroll to element:
+  driver.execute_script("arguments[0].scrollIntoView();", element)
+
+95. How do you handle multiple windows or tabs in Selenium?
+- handles = driver.window_handles
+- driver.switch_to.window(handles[1]) → switch to second window/tab
+
+96. How do you handle file uploads in Selenium?
+- element.send_keys("C:/path/to/file.txt") → send file path to <input type="file">
+
+97. What is Fluent Wait in Selenium?
+- Wait with timeout + polling interval + ignored exceptions
+- Example:
+  wait = WebDriverWait(driver, 10, poll_frequency=2, ignored_exceptions=[NoSuchElementException])
+  element = wait.until(EC.element_to_be_clickable((By.ID, "submit")))
+
+98. How do you handle stale dropdowns or select elements?
+- Use Select class:
+  from selenium.webdriver.support.ui import Select
+  select = Select(driver.find_element(By.ID, "dropdown"))
+  select.select_by_visible_text("Option1")
+  select.select_by_index(1)
+  select.select_by_value("value1")
+
+99. Difference between CSS Selector and XPath
+- CSS → Faster, simpler for direct selection
+- XPath → More powerful, traverse up/down DOM, use functions, slightly slower
+- Recommendation → Use CSS when possible, XPath for complex cases
+
+100. How to perform drag-and-drop using JavaScript when ActionChains fails?
+- driver.execute_script("arguments[0].dispatchEvent(new DragEvent('dragstart'));", source)
+- driver.execute_script("arguments[0].dispatchEvent(new DragEvent('drop'));", target)
+
+101. How to wait for page to load completely?
+- driver.execute_script("return document.readyState") → returns "complete"
+
+102. How to handle hidden elements in Selenium?
+- Check visibility before interaction:
+  if element.is_displayed():
+      element.click()
+- Or use JavaScript to click hidden element:
+  driver.execute_script("arguments[0].click();", element)

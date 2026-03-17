@@ -1,0 +1,356 @@
+## Selenium Interview Q&A (Python-ready)
+
+1. What is Selenium?  
+Open-source tool to automate web applications; controls browsers using Python, Java, C#; used for UI automation; integrates with CI/CD pipelines.
+
+2. What is Selenium mainly used for?  
+Automates web app testing (functional & regression), cross-browser testing, repetitive tasks; e.g., login, form submissions.
+
+3. Important facts about Selenium  
+Open-source, supports major browsers, multiple languages (Python, Java, C#), components: WebDriver, IDE, Grid; cross-platform, CI/CD ready.
+
+4. Main components of Selenium  
+WebDriver: browser automation  
+IDE: record & playback  
+Grid: parallel execution
+
+5. What is Selenium WebDriver?  
+Core component; simulates real-user actions; communicates directly with browser; fast & modern; widely used in Python projects.
+
+6. What is Selenium IDE?  
+Browser extension; records actions & auto-generates scripts; exports to Python, Java, C#, Ruby; less flexible than WebDriver; beginner-friendly.
+
+7. What is Selenium Grid?  
+Runs tests in parallel across multiple machines, browsers, OS; Hub/Node architecture; speeds up large test suites.
+
+8. What is Selenium RC?  
+Remote Control, older tool replaced by WebDriver; required server; slower & complex setup.
+
+9. How is WebDriver different from RC?  
+WebDriver communicates directly; RC needed a server; WebDriver is faster, simpler, and supports modern apps.
+
+10. Can Selenium be used for mobile testing?  
+Selenium handles only web automation; use Appium for Android/iOS mobile web apps (Appium uses WebDriver API).
+
+11. Advantages of Selenium  
+Open-source, multi-browser/language support, cross-platform, CI/CD integration, parallel execution, automates repetitive tasks, improves accuracy.
+
+12. Limitations of Selenium  
+Cross-browser issues, slower for large apps, dynamic element challenges, limited mobile support, no desktop app automation, no built-in reporting, high maintenance.
+
+13. Handling dynamic elements  
+Use Implicit/Explicit/Fluent Waits; robust locators (ID, XPath, CSS); handle AJAX; ensure element readiness.
+
+14. Managing cross-browser issues  
+Test on multiple browsers; use standard locators; avoid browser-specific assumptions; combine with Grid or cloud tools.
+
+15. CI/CD integration  
+Works with Jenkins, GitLab, Azure DevOps; runs automated tests on code push; provides faster feedback and bug detection.
+
+16. Choosing IDE vs WebDriver  
+IDE: beginners, prototypes; WebDriver: real projects, precise control, complex scenarios.
+
+17. Why pick WebDriver over Grid?  
+WebDriver: script creation & execution; Grid: scaling tests in parallel across browsers/machines.
+
+18. Advanced user interactions in WebDriver  
+Use ActionChains: drag & drop, mouse hover, keyboard actions, file upload; simulates real user behavior.
+
+19. Selenium WebDriver workflow  
+Script → Driver → Browser → Result; write Python/Java script, driver executes, browser performs actions, returns results.
+
+20. Features of Selenium  
+Multi-language & browser support, cross-platform, parallel execution, pop-ups/alerts handling, record/playback, lightweight, cloud testing support.
+
+21. Real-world uses  
+Regression testing, data scraping, automating repetitive tasks, CI/CD testing, cross-browser testing.
+
+22. How to install Selenium for Python  
+pip install selenium (Python must be installed and PATH set).
+
+23. How to set up WebDriver in Python  
+from selenium import webdriver  
+driver = webdriver.Chrome()  
+driver.get("https://www.google.com")  
+driver.quit()
+
+24. How to verify Selenium installation is working  
+Run a sample script that opens a browser, navigates to a site, prints title, and quits; successful execution → installed.
+
+25. Which browsers can you automate in Selenium Python?  
+Chrome, Firefox, Edge (Selenium Manager handles drivers).
+
+26. What is the get() method in Selenium WebDriver?  
+Opens a website; driver.get("https://www.example.com").
+
+27. Why is the get() method important?  
+Browser opens but site does not load without it; first step in most scripts.
+
+28. Python example using get()  
+from selenium import webdriver  
+driver = webdriver.Firefox()  
+driver.get("https://www.google.com")  
+driver.quit()
+
+29. How do you locate elements in Selenium WebDriver?  
+Using locators: ID, NAME, CLASS_NAME, TAG_NAME, LINK_TEXT, PARTIAL_LINK_TEXT, CSS SELECTOR, XPATH.
+
+30. How do you interact with elements in Selenium WebDriver?  
+.send_keys("text"), .clear(), .click(), keyboard keys with send_keys(Keys.KEY_NAME).
+
+31. How do you handle iframes in Selenium?  
+driver.switch_to.frame(iframe_element) → interact → driver.switch_to.default_content().
+
+32. How do you locate multiple elements in Selenium WebDriver?  
+driver.find_elements(By.TAG_NAME, "a") → returns list of elements.
+
+33. Locator strategies for multiple elements  
+By.NAME, By.XPATH, By.LINK_TEXT, By.PARTIAL_LINK_TEXT, By.TAG_NAME, By.CLASS_NAME, By.CSS_SELECTOR.
+
+34. What happens if no elements are found with find_elements()?  
+Returns empty list []; does not raise exception.
+
+35. Python example for multiple elements  
+from selenium import webdriver  
+from selenium.webdriver.common.by import By  
+driver = webdriver.Chrome()  
+driver.get("https://example.com")  
+elements = driver.find_elements(By.TAG_NAME, "a")  
+for element in elements:  
+    print(element.text)  
+driver.quit()
+
+36. When should you use find_elements()?  
+Validate list items, tables, dropdowns, multiple similar buttons, extract data.
+
+37. Best locator strategy in Selenium  
+Priority: ID → NAME → CSS_SELECTOR → XPATH → CLASS_NAME → TAG_NAME → LINK_TEXT.
+
+38. Why waits are needed in Selenium  
+Modern web apps load dynamically; prevents NoSuchElementException & ElementNotVisibleException.
+
+39. Types of waits in Selenium  
+Implicit Wait (global), Explicit Wait (specific element), Fluent Wait (custom polling).
+
+40. What is Explicit Wait?  
+Waits until a specific condition occurs; faster than time.sleep().
+
+41. How Explicit Wait works  
+from selenium.webdriver.support.ui import WebDriverWait  
+from selenium.webdriver.support import expected_conditions as EC  
+from selenium.webdriver.common.by import By  
+element = WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.ID, "username")))
+
+42. Common Expected Conditions  
+title_is, title_contains, presence_of_element_located, visibility_of_element_located, element_to_be_clickable, alert_is_present.
+
+43. Explicit Wait vs time.sleep()  
+Explicit: waits only until condition met, faster, recommended.  
+time.sleep(): waits fixed time, slower, not recommended.
+
+44. Advantages of Explicit Wait  
+Handles dynamic elements, reduces flaky tests, prevents unnecessary delays.
+
+45. What is Implicit Wait?  
+Maximum wait for element search; applied globally.
+
+46. Characteristics of Implicit Wait  
+Global, set once per session, simple, good for minor delays.
+
+47. How Implicit Wait works internally  
+Selenium polls repeatedly until timeout; continues immediately if element appears.
+
+48. Advantages of Implicit Wait  
+Simple, global, reduces NoSuchElementException for small delays.
+
+49. Limitations of Implicit Wait  
+Applies to all elements, less control, cannot wait for specific conditions.
+
+50. What are Action Chains in Selenium?  
+Advanced interactions: mouse hover, right click, drag & drop, keyboard shortcuts.
+
+51. Why use Action Chains?  
+Normal .click() or .send_keys() cannot handle complex actions.
+
+52. How Action Chains work  
+Create ActionChains(driver) → queue actions → .perform() to execute.
+
+53. Common ActionChains methods  
+click(), double_click(), context_click(), click_and_hold(), release(), move_to_element(), move_by_offset(x,y), drag_and_drop(source,target), send_keys(), key_down(), key_up(), pause(), perform().
+
+54. Python example – Click an element  
+actions = ActionChains(driver)  
+actions.click(element).perform()
+
+55. Python example – Mouse Hover  
+actions = ActionChains(driver)  
+actions.move_to_element(menu).perform()
+
+56. Python example – Drag and Drop  
+actions.drag_and_drop(source, target).perform()
+
+57. Two ways to use ActionChains  
+Chain pattern (single line) or queue pattern (multiple lines with .perform()).
+
+58. What is an Alert in Selenium?  
+Popup message outside DOM: information, confirmation, input.
+
+59. How to handle Alerts in Selenium?  
+Use Alert(driver) → .accept(), .dismiss(), .send_keys(), .text.
+
+60. Common Alert methods  
+accept(), dismiss(), send_keys("input"), text.
+
+61. Steps to handle an Alert  
+Trigger alert → alert = Alert(driver) → perform action (accept(), dismiss(), send_keys()).
+
+62. Python example – Accept Alert  
+alert = Alert(driver)  
+alert.accept()
+
+63. Python example – Dismiss Alert  
+alert.dismiss()
+
+64. Python example – Send Input to Alert  
+alert.send_keys("Hello!")  
+alert.accept()
+
+65. Types of Alerts  
+Simple (OK), Confirmation (OK/Cancel), Prompt (Input + OK/Cancel).
+
+66. What are Cookies in Selenium?  
+Data stored in browser: sessions, preferences, auth.
+
+67. Cookie methods in Selenium WebDriver  
+add_cookie(), get_cookie(), get_cookies(), delete_cookie().
+
+68. Example workflow – Cookie Handling  
+driver.add_cookie({"name":"foo","value":"bar"})  
+cookie = driver.get_cookie("foo")  
+driver.delete_cookie("foo")
+
+69. What are Exceptions in Selenium?  
+Errors during execution: element not found, hidden, unclickable, timeout, alert/frame missing.
+
+70. Why Exceptions Occur  
+Wrong locator, element not loaded, hidden/disabled, overlay, slow page load.
+
+71. Common Selenium Exceptions  
+NoSuchElementException, ElementClickInterceptedException, ElementNotInteractableException, NoAlertPresentException, NoSuchFrameException, TimeoutException, StaleElementReferenceException, InvalidSelectorException.
+
+72. Python example – Handling Exceptions  
+try:  
+    element.click()  
+except NoSuchElementException:  
+    print("Element not found")
+
+73. Why Exception Handling is Important  
+Prevents test failures; ensures stable, reliable automation scripts.
+
+74. What is an Assertion in Selenium?  
+Validates expected vs actual result; passes or fails test.
+
+75. Why Assertions Are Important  
+Validation, bug detection, test reliability.
+
+76. How Assertions Are Used in Selenium Python  
+Built-in assert; frameworks: unittest, pytest.
+
+77. Basic Python Assertion  
+assert 5 > 3
+
+78. Assertion with Custom Message  
+assert driver.title == "Google", "Title does not match"
+
+79. Common Assertions in Selenium Python  
+Page title, element text, displayed status, URL, element existence.
+
+80. Python example Selenium script with Assertion  
+assert driver.title == "Google"
+
+81. Assertions using unittest Framework  
+self.assertEqual(driver.title, "Google")
+
+82. Common unittest Assertions  
+assertEqual, assertNotEqual, assertTrue, assertFalse, assertIsNone, assertIsNotNone
+
+83. Real Selenium Test Example – Login Page  
+assert driver.title == "Login Page"
+
+84. What is Page Object Model (POM)?  
+Design pattern: separate class per page with locators & actions; clean, reusable, maintainable.
+
+85. Why Use POM?  
+Easier maintenance; update locator once; reduces code duplication; better readability.
+
+86. Advantages of POM  
+Maintenance, reusability, readability, reduced duplication.
+
+87. What is the difference between driver.close() and driver.quit()?  
+- driver.close() → closes the current browser tab/window.  
+- driver.quit() → closes all browser windows and ends the WebDriver session.
+
+88. What is the difference between find_element and find_elements?  
+- find_element → returns a single element, raises exception if not found.  
+- find_elements → returns a list of elements, empty list if none found.
+
+89. How do you handle StaleElementReferenceException?  
+- Occurs when DOM updates after locating an element.  
+Solutions: Re-find the element before interaction; use Explicit Waits until element is refreshed.
+
+90. What is the difference between Absolute XPath and Relative XPath?  
+- Absolute XPath → /html/body/div[1]/input → starts from root, brittle.  
+- Relative XPath → //input[@id='username'] → starts anywhere in DOM, recommended.
+
+91. What is Shadow DOM and how to handle it in Selenium?  
+- Shadow DOM: hidden DOM attached to elements (Web Components).  
+- Access using JavaScript:  
+shadow_root = driver.execute_script('return arguments[0].shadowRoot', element)  
+shadow_element = shadow_root.find_element(By.CSS_SELECTOR, 'button')
+
+92. How do you take a screenshot in Selenium?  
+- driver.save_screenshot("screenshot.png")  
+- driver.get_screenshot_as_file("screenshot.png")
+
+93. How do you scroll a page using Selenium?  
+- driver.execute_script("window.scrollTo(0, document.body.scrollHeight)") → scroll bottom  
+- driver.execute_script("arguments[0].scrollIntoView();", element) → scroll to element
+
+94. How do you handle multiple windows or tabs in Selenium?  
+- handles = driver.window_handles  
+- driver.switch_to.window(handles[1])  # switch to second window/tab
+
+95. How do you handle file uploads in Selenium?  
+- element.send_keys("C:/path/to/file.txt")  # send file path to input type="file"
+
+96. What is Fluent Wait in Selenium?  
+- Wait with timeout + polling interval + ignored exceptions:  
+from selenium.webdriver.support.ui import WebDriverWait  
+from selenium.webdriver.support import expected_conditions as EC  
+from selenium.common.exceptions import NoSuchElementException  
+
+wait = WebDriverWait(driver, 10, poll_frequency=2, ignored_exceptions=[NoSuchElementException])  
+element = wait.until(EC.element_to_be_clickable((By.ID, 'submit')))
+
+97. How do you handle stale dropdowns or select elements?  
+from selenium.webdriver.support.ui import Select  
+select = Select(driver.find_element(By.ID, "dropdown"))  
+select.select_by_visible_text("Option1")  
+select.select_by_index(1)  
+select.select_by_value("value1")
+
+98. Difference between CSS Selector and XPath  
+- CSS → faster, simpler for simple hierarchies  
+- XPath → powerful, can traverse up/down, use functions, slightly slower
+
+99. How to perform drag-and-drop using JavaScript when ActionChains fails?  
+driver.execute_script("arguments[0].dispatchEvent(new DragEvent('dragstart'));", source)  
+driver.execute_script("arguments[0].dispatchEvent(new DragEvent('drop'));", target)
+
+100. How to wait for page to load completely?  
+driver.execute_script("return document.readyState")  # returns "complete" when fully loaded
+
+101. How to handle hidden elements in Selenium?  
+- Use element.is_displayed() before interacting  
+- Or JavaScript click: driver.execute_script("arguments[0].click();", element)
+
