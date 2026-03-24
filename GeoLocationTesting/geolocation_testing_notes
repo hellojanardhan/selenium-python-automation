@@ -1,0 +1,35 @@
+✅ What is Geolocation Testing?
+- Geolocation testing verifies application behavior based on user location (latitude & longitude)
+- Usef for:
+    - Locaiton-based content
+    - Currencty / language change
+    - Geo-restrictions
+
+✅ How Selenium Handles Geolocation?
+- Selenium uses Chrome DevTools Protocol (CDP) to override location.
+- Steps to perform:
+    - Allow location permission
+    - Set latitude & longitude
+    - Open applicaition
+
+✅ Example (Chrome – Recommended 🔥)
+
+from selenium import webdriver
+
+options = webdriver.ChromeOptions()
+
+options.add_experimental_option("prefs", {
+    "profile.default_content_setting_values.geolocation" : 1
+})
+
+driver= webdriver.Chome(options = options)
+
+# Set location (Banglore)
+driver.execute_cdp_cmd("Emulation.setGeolocationOverride",{
+    "latitude" : 12.9716,
+    "longitude" : 77.5946,
+    "accuracy" : 100
+})
+
+driver.get("https://whatmylocation.com/")
+

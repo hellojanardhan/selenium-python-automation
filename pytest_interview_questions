@@ -1,0 +1,259 @@
+1. What is Pytest?
+- Pytest is a Python testing framework used for unit, API, and UI automation testing.
+- It provides simple syntax, fixtures, parametrization, and plugins.
+- It is widely used in automation frameworks and CI/CD pipelines.
+Example:
+    def test_add():
+        assert 2 + 3 == 5
+
+2. Why is Pytest used?
+- Pytest reduces boilerplate code and improves test readability and scalability.
+- It supports powerful features like fixtures, assertions, and plugins.
+- It is widely used in Selenium and API automation frameworks.
+
+3. What is a fixture in Pytest?
+- A fixture is used for setup and teardown of test resources like browser, DB, or API client.
+- It helps reuse code and maintain clean test structure.
+Example:
+    import pytest
+    @pytest.fixture
+    def setup():
+        return "data"
+
+    def test_example(setup):
+        assert setup == "data"
+    
+4. What is parametrization?
+- Parametrization allows running the same test with multiple input values.
+- It is used for data-driven testing and reduces duplicate code.
+
+Example:
+    import pytest
+    @pytest.mark.parametrize("a,b", [(1,2), (3,4)])
+    def test_add(a, b):
+        assert a + b > 0
+
+5. What is pytest.raises?
+- It is used to validate expected exceptions in negative test cases.
+- It ensures a specific exception is raised.
+Example:
+    import pytest
+        def test_exception():
+            with pytest.raises(ValueError):
+                int("abc")
+
+6. What is conftest.py?
+- conftest.py is used to define shared fixtures and hooks across test files.
+- It is automatically detected by Pytest without import.
+
+Example:
+    import pytest
+    @pytest.fixture
+    def setup():
+        return "shared data"
+
+7. What is marker in Pytest?
+- Markers are used to categorize tests like smoke, regression, sanity.
+- They help in filtering and running specific tests.
+Example:
+    import pytest
+    @pytest.mark.smoke
+    def test_login():
+        assert True
+
+    Run
+        pytest -m smoke
+
+8. How do you run tests in Pytest?
+- Pytest automatically discovers test files and functions.
+- You can run all or specific tests using filters.
+Examples:
+    pytest
+    pytest -v
+    pytest test_file.py
+    pytest -m smoke
+
+9. How do you handle setup and teardown?
+- Handled using fixtures with yield.
+- Code before yield = setup, after yield = teardown.
+Example:
+    import pytest
+    @pytest.fixture
+    def setup():
+        print("setup")
+        yield "data"
+        print("teardown")
+
+    def test_example(setup):
+        assert setup == "data"
+
+10. How do you run tests in parallel?
+- Pytest uses pytest-xdist for parallel execution.
+- It improves execution speed using multiple CPUs.
+Example:
+    pytest -n 4
+
+11. How do you do API testing in Pytest?
+- API testing is done using the requests library.
+- We validate status code and response data.
+Example:
+    import requests
+    def test_api():
+        res = requests.get("https://api.github.com")
+        assert res.status_code == 200
+
+12. How do you integrate Selenium with Pytest?
+- Pytest is used as test runner and Selenium for browser automation.
+- Fixtures manage WebDriver setup and teardown.
+Example:
+    import pytest
+    from selenium import webdriver
+
+    @pytest.fixture
+    def driver():
+        driver = webdriver.Chrome()
+        yield driver
+        driver.quit()
+
+    def test_google(driver):
+        driver.get("https://google.com")
+        assert "Google" in driver.title
+
+13. What is Page Object Model (POM)?
+- POM separates UI locators and actions from test logic.
+- It improves maintainability and reusability.
+Example:
+    class LoginPage:
+    def __init__(self, driver):
+        self.driver = driver
+
+    def login(self, user, pwd):
+        pass
+
+14. How do you handle waits in Selenium?
+- We use implicit and explicit waits.
+- Explicit waits are preferred for stability.
+Example:
+    from selenium.webdriver.common.by import By
+    from selenium.webdriver.support.ui import WebDriverWait
+    from selenium.webdriver.support import expected_conditions as EC
+
+    def test_wait(driver):
+        WebDriverWait(driver, 10).until(
+            EC.presence_of_element_located((By.ID, "id"))
+        )
+
+15. How do you handle authentication?
+- Authentication is handled using fixtures to store tokens or sessions.
+- It avoids repeated login in every test.
+Example:
+    import pytest
+    @pytest.fixture(scope="session")
+    def token():
+        return "auth_token"
+
+16. What is test discovery?
+- Pytest automatically finds tests based on naming conventions.
+- Files must start with test_ and functions must start with test_.
+
+17. What is skip and xfail?
+- skip → test is not executed
+- xfail → test is expected to fail
+Example:
+    import pytest
+    @pytest.mark.skip
+    def test_skip():
+        assert True
+
+    @pytest.mark.xfail
+    def test_xfail():
+        assert 1 == 2
+
+18. What is monkeypatch?
+- Used to replace functions or variables at runtime for testing.
+- Mainly used for mocking dependencies.
+Example:
+    def get_data():
+    return "real"
+
+    def test_mock(monkeypatch):
+        def mock():
+            return "mock"
+
+        monkeypatch.setattr(__name__ + ".get_data", mock)
+        assert get_data() == "mock"
+
+19. What is fixture scope?
+- Scope defines how long fixture runs.
+    function → every test
+    module → file level
+    session → full run
+Example:
+    import pytest
+    @pytest.fixture(scope="session")
+    def db():
+        return "connection"
+
+20. What is pytest.ini?
+- It is a configuration file for global settings like markers and options.
+Example:
+    [pytest]
+    markers=
+        smoke
+        regression
+
+21. What is pytest-xdist?
+- Used for parallel execution of test cases
+Example:
+    pytest -n 4
+
+22. What is pytest-html?
+- Generates HTML reports for test execution.
+Example:
+    pytest --html=report.html
+
+23. What is logging in Pytest?
+- Logging is used for debugging and test validation. 
+- It can be captured using caplog fixture.
+Example:
+    import logging
+    def test_log(caplog):
+        logging.info("message")
+        assert "message" in caplog.text
+
+24. What is test independence?
+- Each test should run independently without relying on others.
+- It improves reliability and parallel execution.
+
+25. What is fixture teardown using yield?
+- yield separates setup and teardown logic.
+Example:
+    import pytest
+
+    @pytest.fixture
+    def setup():
+        print("setup")
+        yield
+        print("teardown")
+
+26. What is Pytest vs Unittest?
+- Pytest is simple, flexible, and uses functions.
+- Unittest is class-based and more verbose.
+- Pytest is widely used in automation frameworks.
+
+27. What is test coverage?
+- It measures how much code is tested using pytest-cov.
+    Exmple:
+        pytest --cov=.
+
+28. What is flaky test?
+- A flaky test passes and fails randomly due to timing or environment issues.
+- It should be fixed to ensure stable automation.
+
+29. What is dependency between tests?
+- Tests should NOT depend on each other.
+- Each test should be independent for reliability.
+
+30. What is boilerplate code?
+- Boilerplate code is repetitive code.
+- Pytest reduces it using fixtures and simple functions.

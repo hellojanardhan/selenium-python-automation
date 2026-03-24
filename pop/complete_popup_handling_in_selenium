@@ -1,0 +1,125 @@
+1. What is a Popup?
+- A popup is an UI element that appears on top of the main page
+- Types of popups:
+    - Browser Window Popup(New Tab/Window)
+    - Alert Popup
+    - Model Popup(HTML-based popup)
+    - Authentication Popup(Username/Password)
+
+2. Window Popup (New Tab / Window)
+- When clicking a button open a new browser Window or Tab
+- Example:
+    - Clicking "Login with google"
+    - Payment gateway page
+
+3. How Selenium Handles Window Popup
+- Key Concept
+    - Selenium uses window handle
+        driver.current_window_handle -> Current window
+        driver.windo_handles -> all windows
+    
+- Basic Example
+    from selenium import webdriver
+    from selenium.webdriver.common.by import By
+
+    driver = webdriver.Firefox()
+    driver.get("https://example.com")
+
+    main_window=driver.current_window_handle
+    driver.find_element(By.ID, "openWindow").click()
+    windows = driver.window_handles
+    for window in windows:
+        if window!=main_window:
+            driver.switch_to_windiw(window)
+            break
+        
+    print(driver.title)
+    driver.close() # close child-window
+    driver.switch_to_window(main_window)
+
+    - Important Methods
+    Method & Use
+    ------------
+    - driver.switch_to_window -> Switch window
+    - driver.close() -> close child window
+    - driver.quit() -> Close all windows
+    - driver.window_handles -> Get all windows
+
+    - Advanced Window Handling
+        - Multiple windows
+        windows = driver.window_handles
+        for window in windows:
+            driver.switch_to_window(window)
+            print(driver.title)
+        
+        - Switch by Title
+        for window in driver.window_handles:
+            driver.switch_to_window(window)
+            if "Google" in driver.title:
+                break
+        
+        - Wait for New Window
+        from selenium.webdriver.support.ui import WebDriverWait
+        from selenium.webdriver.support import expected_conditions as EC
+        
+        WebDriverWait(driver , 10).until(EC.number_of_windows_to_be(2))
+
+4. Alert Popup (JavaScript Alert)
+- Types:
+    1. simple alert
+    2. confirm alert
+    3. prompt alert
+
+- Simple Alert
+    alert = driver.switch_to.alert
+    alert.accept()   # OK
+    alert.dismiss()  # Cancel
+
+- Prompt Alert
+    alert.send_keys("Hello")
+    alert.accept()
+
+- Get text
+    print(alert.text)
+
+5. Modal Popup (HTML Popup)
+- Definition
+    - Not a real browser popup
+    - Just HTML +CSS overlay
+    - Exists inside DOM
+- Example:
+    - Login modal
+    - Signup modal
+
+- Key Concept
+    - NO switch_to
+    - Handle like normal elements
+
+- Example
+    driver.find_element(By.ID, "openModal").click()
+    driver.find_element(By.ID, "username").send_keys("test")
+    driver.find_element(By.ID, "password").send_keys("1234")
+    driver.find_element(By.ID, "loginBtn").click()
+- Wait for Modal
+    WebDriverWait(driver, 10).until(
+    EC.visibility_of_element_located((By.ID, "modal"))
+)
+
+6. Authentication Popup
+- Selenium Cannot handle OS-level popup
+- Solution : URL Trick
+    driver.get("https://username:password@example.com")
+
+- Solution :
+    AutoIT (Window)
+    RobotClass (Java)
+
+7. Difference: Window vs Modal
+Feature & Window popup & Modal Popup
+------------------------------------
+- Type -> New browser window  , Inside DOM
+- Switch -> YES , NO
+- Selenium method -> switch_to_window , normal locators
+- speed -> Slower, Faster
+
+

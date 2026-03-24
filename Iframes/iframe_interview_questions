@@ -1,0 +1,72 @@
+1. What is iFrame?
+- iFrame (Inline Frame) is an HTML element used to embed another webpage inside the current webpage.
+
+2. Why do we use iFrames?
+- iFrames are used to embed external content like videoes, maps , ads or another webpages inside a webpage
+
+3. Can Selenium directly access elements inside an iFrame?
+- NO, Selenium cannot directly access elements inside n iFrame. We must switch to the iFrame first.
+
+4. How do you handle iFrames in Selenium?
+- We handle iFrames by switching the webDriver context to the frame using driver.switch_to_iframe()
+
+5. What are the ways to switch to an iFrame?
+- There are 3 ways to switch:
+    - By index
+    - By Name or ID
+    - By using webelement
+
+6. How do you switch back from iFrame to main page?
+- We use:
+    driver.switch_to.default_content()
+
+7. What is parent_frame()?
+- It is used to move back to the parent frame when working with nested iFrames
+
+8. What is the difference between default_content() and parent_frame()?
+- default_content() -> Switches to main page directly
+- parent_frame() -> Switch only to the immediate parent frame
+
+9. What exception occurs when working with iFrames?
+- Most common exception:
+    - NoSuchElementExceptio (Not switched to frame)
+    - StaleElementReferenceException (DOM refreshed)
+
+10. How do you identify an iFrame?
+- We can identify iFrames using:
+    - <iframe> in the DOM
+    - XPath: //iframe
+    - Developer Tools (inspect element)
+
+11. Can iFrame contain another iFrame?
+- YES, This is called nested iframes
+
+12. How do you handle nested iFrames?
+- We switch step by step:
+    driver.switch_to_frame("fram1")
+    driver.switch_to_frame("fram2")
+
+13. How do you handle dynamic iFrames?
+-  We use explicit waits
+    WebDriverWait(driver , 10).until(
+        EC.frame_to_be_available_and_switch_to_it((By.ID, "frameID"))
+    )
+
+14. How do you wait for an iFrame to load?
+- Using explicti wait with:
+    frame_to_be_available_and_switch_to_it
+
+15. What is the challenge of cross-domain iFrames?
+- Due to same origin policy , Selenium may not access content if iFrame is from a different Domain
+
+16. How do you debug iFrame issues?
+- Check If frame exists in DOM
+- Ensure correct switching
+- Use browser inspect tool
+- Add explicit waits
+
+17. How do you verify content inside an iFrame?
+- Switch to iframe first , then validate the content using assertions or text verification
+
+18. What happens if you don’t switch to iFrame?
+- Selenium will throw NoSuchElementException because elements inside iFrame are not in the DOM

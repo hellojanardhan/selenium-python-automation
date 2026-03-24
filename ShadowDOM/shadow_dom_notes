@@ -1,0 +1,116 @@
+1. What is Shadow DOM?
+- Shadown DOM is an hidden/encapsulated DOM structure inside an element
+- That means:
+    - It cannot access it directly like normal DOM
+    - It is isolated from the main DOM
+
+- Simple definition
+    - Shadow DOM is an hidden mini DOM inside an webpage
+
+2. Why Shadow DOM is used?
+- Main purpose:
+    - Encapsulation (Isolation of code)
+    - Prevent CSS conflicts
+    - Build reusable UI components
+- Commonly used for :
+    - Web components
+    - Modern UI frames
+
+3. Real-time Examples
+- You already see Shadow DOM in:
+    - Date picker
+    - Video player controls
+    - Chrome DevTools elements
+    - Material UI components
+
+4. Structure of Shadow DOM
+    <host-element>
+    #shadow-root (open)
+        <input type="text">
+    </host-element>
+- Important terms:
+    Host element -> Element where Shadow DOM is attached
+    Shadow Room -> Entry point of Shadow DOM
+    Shadow tree -> Elements inside shadow DOM
+
+5. Types of Shadow DOM
+- 1. Open Shadow DOM
+    - Can be accessed by using Javascript
+        element.shadowRoot
+
+- ❌ 2. Closed Shadow DOM
+    - Can not be accessed
+        element.shadowRoot // returns all
+    
+6. Normal DOM vs Shadow DOM
+Feature & Normal DOM & Shadow DOM
+---------------------------------
+- Access -> Direct , Hidden
+- CSS scopre -> Global , local
+- Isolation -> YES , NO
+- Selenium support -> Esay , Tricky
+
+7. Problem in Selenium 😵
+👉 Normal locator:
+    driver.find_element(By.ID, "username")
+❌ Will NOT work inside Shadow DOM
+
+👉 Because:
+    - Elements are not visible in main DOM
+    - They are encapsulated
+
+8. How to Handle Shadow DOM in Selenium (Important 🔥)
+✅ Step-by-step (Using JavaScript)
+host = driver.find_element(By.CSS_SELECTOR, "host-element")
+
+shadow_root = driver.execute_script("return arguments[0].shadowRoot", host)
+
+element = shadow_root.find_element(By.CSS_SELECTOR, "input")
+
+element.send_keys("Hello")
+
+9. Nested Shadow DOM (Advanced)
+👉 Shadow DOM inside another Shadow DOM
+host1 = driver.find_element(By.CSS_SELECTOR, "parent-host")
+shadow1 = driver.execute_script("return arguments[0].shadowRoot", host1)
+
+host2 = shadow1.find_element(By.CSS_SELECTOR, "child-host")
+shadow2 = driver.execute_script("return arguments[0].shadowRoot", host2)
+
+element = shadow2.find_element(By.CSS_SELECTOR, "input")
+element.send_keys("Nested")
+
+10. Selenium 4 Shortcut
+👉 Direct method available:
+shadow_root = host.shadow_root
+shadow_root.find_element(By.CSS_SELECTOR, "input").send_keys("Hi")
+
+
+11. How to Identify Shadow DOM
+👉 In Chrome DevTools:
+    - Right click -> Inspect
+    - Look for:
+        #shadow-root(open)
+👉 That means Shadow DOM exists
+
+12. Key Interview Points 🎯
+- Shadow DOM provides Encapsualtion
+- Isolates CSS & Javascript
+- Selenium cannot directly access it
+- Use:
+    - Javascript executor OR
+    - shadow_root(Selenium 4)
+- Types: Open & Closed
+
+13. Common Mistakes ❌
+- Using XPath directly inside a shadow DOM
+- Skipping the shadow root
+- Trying to access closed shadow DOM
+
+14. When it will fail?
+- Closed Shadow DOM:
+    - Cannot be accessed vis Selenium
+- Solution:
+    - Need developer support
+    - Or use alternative testing approach
+

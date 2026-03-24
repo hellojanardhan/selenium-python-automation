@@ -1,0 +1,53 @@
+1️⃣ What is File Download in Selenium?
+- It means verifying that a file is successfully downloaded from a web application
+- Example:
+    -> Clicking a Download button -> file gets saved locally
+
+2️⃣ Key Challenges
+- Selenium cannot directly access OS-level downloads UI
+- Need to:
+    - configure browser download settings
+    - Verify file in local system(folder)
+
+3️⃣ How to Handle File Downloads
+✅ Step 1: Set Download Path (Browser Level)
+- Disable popup
+- Set auto-download folder
+
+✅ Step 2: Trigger Download
+- Click Download button using selenium
+
+✅ Step 3: Verify File Downloaded
+- Check file exists in local history
+- Optionally check:
+    - File name
+    - File size
+    - File content
+
+4️⃣ Browser-Specific Setup
+🔹 Chrome
+    - Use ChromeOptions
+    - Set:
+        - download.default_directory
+        - download_prompt_for_download = False
+🔹 Firefox
+    - Use FirefoxProfile
+    - set:
+        - browser.download.dir
+        - browser.helperApps.neverAsk.saveToDisk
+
+5️⃣ Ways to Validate Download
+1. File exists
+- os.path.exists(file_path)
+
+2. Wait for Download Completion
+- File should not have .crdownload (Chrom)
+- File should not have .part (Firefox)
+
+3. File Size Check
+os.path.getsize(file_path) > 0
+
+6️⃣ Important Points
+- Selenium handles UI only, not OS dialogs
+- Always use custom download directory
+- Use wait instead of sleep (best practice)

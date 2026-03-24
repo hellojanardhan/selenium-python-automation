@@ -1,0 +1,116 @@
+1. What is Key Press in Selenium?
+- Sending keyboard actions like Enter , Tab , Escape , using selenium
+
+2. Which class is used for keyboard actions?
+- from selenium.webdriver.common.keys import Keys
+
+3. How do you press Enter?
+    element.send_keys(Keys.ENTER)
+
+4. How to type text into input field?
+    element.send_keys("Hello")
+
+5. How to press TAB key?
+    element.send_keys(Keys.TAB)
+
+6. What are commonly used keys?
+    Keys.ENTER
+    Keys.TAB
+    Keys.ESCAPE
+    Keys.BACKSPACe
+    Keys.DELETE
+
+7. Difference between send_keys() and Keys
+    send_keys -> method
+    Keys -> speciak keyboard constants
+
+8. How to press multiple keys together?
+    element.send_keys(Keys.CONTROL , "a")
+
+9. How to clear input field using keyboard?
+    element.send_keys(Keys.CONTROL , "a")
+    element.send_keys(Keys.DELETE)
+
+10. How to submit form using keyboard?
+    element.send_keys(Keys.ENTER)
+
+11. What is the difference between click() and ENTER?
+- click() -> mouse action
+- ENTER -> keyboard action (used when no button or for accessbility)
+
+12. How to use keyboard without locating element?
+    Use ActionChains
+
+    from selenium.webdriver import ActionChains
+
+    actions = ActionChains(driver)
+    actions.send_keys(Keys.ENTER).perform()
+
+13. What is ActionChains in Selenium?
+- Used for complex user interactions like
+    - Keyboard combos
+    - Mouse + Keyboard actions
+
+14. How to perform Ctrl + A, Ctrl + C, Ctrl + V?
+actions.key_down(Keys.CONTROL).send_keys('a').key_up(Keys.CONTROL).perform()
+
+15. Difference between ActionChains and send_keys()
+ActionChains & send_keys()
+--------------------------
+- Element specific , global actions
+- simple , Complex interactions
+- More stable , slightly tricky
+
+16. How to handle keyboard shortcuts?
+    actions.key_down(Keys.CONTROL).send_keys('s').key_up(Keys.CONTROL).perform()
+
+17. Why sometimes key press doesn't work?
+- Reasons:
+    - Element not focussed
+    - Element not visible
+    - Wrong frame
+    - Timing issue
+    
+18. How to ensure key press works?
+- Always:
+    element.click()  # press
+    element.send_keys(Keys.ENTER)
+
+19. How to search without clicking search button?
+- element.send_keys("Hello" , Keys.ENTER)
+
+20. How to close popup using keyboard?
+ - driver.find_element(By.TAG_NAME , "body").send_keys(Keys.ESCAPE)
+
+21. How to switch fields using keyboard?
+    element.send_keys(Keys.TAB)
+
+22. How to handle auto-suggestions dropdown?
+    element.send_keys("Selenium")
+    element.send_keys(Keys.ARROW_DOWN)
+    element.send_keys(Keys.ENTER)
+
+23. How to validate key press result?
+- assert "ENTER" in element.text
+
+24. What if send_keys() is not working?
+- Try:
+    - click first
+    - use ActionChains
+    - USe Javascript
+
+25. How to handle StaleElement in key press?
+- Re-locate elements:
+    element = driver.find_element(...)
+    element.send_keys(Keys.ENTER)
+26. How to press key globally (not on element)?
+- ActionChains(driver).send_keys(Keys.ENTER).perform()
+
+27. How to handle key press inside iFrame?
+driver.switch_to.frame(...)
+element.send_keys(Keys.ENTER)
+
+28. Difference between Keys.RETURN and Keys.ENTER?
+- Almost same but, 
+    KEYS.ENTER -> main enter key
+    Keys.RETURN -> legacy(rarely used)

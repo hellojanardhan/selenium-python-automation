@@ -1,0 +1,33 @@
+✅ Basic Answers
+
+1. What is hover action in Selenium?
+- Hover action is used to move the mouse pointer over a web element without clicking it to trigger UI changes like dropdowns or tooltips
+
+2. Which class is used for mouse hover?
+- ActionChains class is used for mouse hover actions in selenium
+
+3. What is ActionChains?
+- ActionChains() is a selenium class used to perform advanced user interactions like mouse hover, drag and drop , right click and double click.
+
+4. Difference between click() and move_to_element()?
+- click() performs a direct click over an element, 
+- move_to_element() only moves the mouse pointer over an element without clicking it
+
+5. Can we perform hover without ActionChains?
+- NO , selenium does not directly support hover without ActionChains, but javascript can be used as an alternative
+
+6. Why perform() is required?
+- perform() executes all the actions defined in ActionChains(). without perform() actions are not executed.
+
+7. How do you handle hidden elements after hover?
+- We perform() hover using ActionChains , then we use explicit wait to locate and interact eith the now visible element
+
+8. What if hover does not work in Selenium?
+- We can try javascript mouseover event or use Actions with proper waits and scroll into views.
+
+9. How do you debug hover failures?
+- we add check locotors , add waits, verify element visibility , and use screenshots/logs to identify issues.
+
+10. Difference between hover and JavaScript mouseover event?
+- Hover in selenium simulates user mouse movement, while javascript mouseover triggers the event directly in DOM without real mouse interaction
+

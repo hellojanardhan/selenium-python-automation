@@ -1,0 +1,17 @@
+1. What is Geolocation Testing?
+- Testing application's behavior based on user's greographical geolocation
+
+2. How do you simulate location in Selenium?
+- Using Chrome DevTools(execute_cdp_command) to override latitude and longitude
+
+3. How do you handle location permission popup?
+- Using Chrome preferences:
+    "profile.default_content_setting_values.geolocation" : 1
+
+4. Can Selenium access real GPS?
+- NO, It simulates location via browser APIs
+
+5. Where is it used in real-time?
+- Ecommerce pricing
+- Content localization
+- Geo-blocking

@@ -1,0 +1,65 @@
+✅ What is Drag and Drop?
+- Drag and Drop is an UI action:
+    - An element(source) is clicked and held
+    - Moved to another element(target)
+    - released
+
+✅ How to Perform in Selenium?
+- We use
+    - ActionChains class
+    - Syntax
+
+    from selenium.webdriver.commom.action_chains import ActionChains
+
+    action = ActionChains(driver)
+    action.drag_and_drop(source, target).perform()
+
+    ✅ Alternative Method (More Reliable)
+    
+    action.click_and_hold(source)\
+            .move_to_element(target)
+            .release()
+            .perform()
+        
+✅ Example Code
+from selenuim import webdriver
+from selenium.webdriver.common.by import By
+from selenium.webdriver.common.action_chains import ActionChains
+
+driver = webdriver.Firefox()
+
+driver.get("https://demoqa.com/droppable")
+
+source = driver.find_element(By.ID, "draggable")
+target = driver.find_element(By.ID, "droppable")
+
+actions = ActionChains()
+actions.drag_and_drop(source , target).perform()
+
+✅ When Drag and Drop Fails?
+- Common reasons
+    - Element not visible
+    - Element inside iframe
+    - Javascript-based UI (React , Angular)
+    - Timing Issues
+
+    ✅ Solutions
+    - Use Explicit wait
+    - Switch to iframe
+
+    driver.switch_to_iframe("frame_name")
+    - use click_and_hold and move_to_element and release and perform
+    - Use Javascript executor(advanced)
+
+✅ Types of Drag and Drop
+- 1. Element to Element
+- By Offset(x, y)
+    actions.drag_and_drop_by_offset(source, 100 , 50).perform()
+
+✅ Key Points for Interview
+- Use actionChains
+- Works on mouse interactions
+- Not always reliable -> Alternative approach needed
+- Requires visible & interactable elements
+
+

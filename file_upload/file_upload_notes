@@ -1,0 +1,63 @@
+File Upload in Selenium 
+
+1. what is File Upload?
+- File upload means sending a file from your system to a web application using automation
+
+2. Types of File Upload in Selenium
+- 1. Standard file upload (input type = file)
+    - Uses <input type="file">
+    - Directly supported by selenium
+
+- 2. Non-standard upload (Custom UI)
+    - Uses buttons like "upload" or "browser"
+    - Opens OS popup (Windows dialog)
+    - Selenium cannot handle OS popups directly
+
+3. Basic File upload(Beginner level)
+    - HTML Example
+        <input type="file" id="uploadFile">
+    
+    from selenium import webdriver
+    from selenium.webdriver.common.by import By
+
+    driver = webdriver.Firefox()
+    driver.get("https://the-internet.herokuapp.com/upload")
+
+    file_input = driver.find_element(By.ID, "file-upload")
+    file_input.send_keys("C:\\Users\\YourName\\Desktop\\test.txt")
+
+    driver.find_element(By.ID, "file-submit").click()
+- send_keys() is used to upload file
+- Provide absolute file path
+
+4. Important Rules
+- File path must be absolute path
+- Element must be <input type="file">
+- No need to click "Browse" action
+
+5. Handling Hidden File Input (Intermediate)
+- Sometimes input file is hidden
+❌ Problem:
+    <input type="file" style="display:none">
+
+✅ Solution (Using JavaScript)
+    driver.execute_script("arguments[0].style.display='block';", file_input)
+    file_input.send_keys("C:\\path\\file.txt")
+
+6. Upload Using AutoIT (Windows) – Advanced
+- Used when OS popup appears
+- Steps:
+    - Install AutoIT
+    - Record script
+    - Compile .exe
+    - use in selenium
+
+    import os
+    driver.find_element(By.ID, "uploadBtn").click()
+    os.system("fileupload.exe")
+
+7. Commom Exceptions
+- NoSuchElementException
+- ElementNotInteractableException
+- InvalidArgumentException
+

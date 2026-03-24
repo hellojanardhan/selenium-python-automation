@@ -1,0 +1,107 @@
+1. What is an iFrame?
+- iFrame (Inline Frame) is an HTML element used to embed another webpage inside the current webpage.
+- Simple Definition:
+    - iFrame is like a "window" , inside a webpage that shows another webpage
+
+2. Why iFrames are used?
+- To embded:
+    - Youtube videos
+    - Google maps
+    - Ads
+    - External websites
+    - Payment gateways
+
+3. Basic Structure of iFrame
+    <iframe>
+    src="page.html"
+    height = "400"
+    width = "600"
+    </iframe>
+
+4. Important Attributes of iFrame
+Attribute & Meaning
+-------------------
+- src -> URL of the page to embed
+- height -> Height of frame
+- width -> Width of frame
+- name -> Used for switching frames
+- frameborder -> Adds/Removes border (deprecated)
+- allow -> Permission (camera , mic etc)
+
+5. Types of iFrames (Important for Interviews)
+- Static iFrame
+    - Fixed content
+    - Does not change dynamically
+- Dynamic iFrame
+    - Loaded using Javascript/AJAX
+    - Changes without page reload
+
+6. iFrame Handling in Selenium (VERY IMPORTANT)
+- Selenium cannot directly access elements inside iFrame
+- We must switch switch to alert
+
+    - 3 Ways to Switch iFrame in Selenium (Python)
+    1. By Index
+        driver.switch_to_frame(0)
+    2. By Name or ID
+        driver.switch_to_frame("frameName")
+    3. By WebElement
+        frame=driver.find_element(By.TAG_NAME , "iframe")
+        driver.switch_to_frame(frame)
+    
+🔙 Switch Back to Main Page
+- driver.switch_to.default_content()
+
+🔙 Switch to Parent Frame
+- driver.switch_to.parent_frame()
+
+7. iFrame Handling Flow (Real Selenium Logic)
+Open Website
+   ↓
+Find iFrame
+   ↓
+Switch to iFrame
+   ↓
+Perform Actions
+   ↓
+Switch back to default page
+
+
+8. Common Problems with iFrames in Selenium
+- ElementNotFound
+- NoSuchElementException
+- StaleElementReferenceException
+
+- Reason
+    - Because you trying to access elements without switching to frame
+
+9. How to Identify iFrame in DOM
+- Using DevTools:
+    <iframe id= "login-frame"></iframe>
+- XPath:
+    //iframe
+
+10. Advanced Concepts
+- Nested iFrames (Frame inside Frame)
+    Main Page
+    ↓
+    iFrame 1
+    ↓
+    iFrame 2
+
+- Selenium Handling:
+    driver.switch_to.frame("frame1")
+    driver.switch_to.frame("frame2")
+
+- To go back:
+    driver.switch_to.default_content()
+
+- Hidden iFrames
+    - Not Visibl on UI
+    - Loaded in background
+    - Still accessible via selenium
+
+- Cross-Domain iFrames
+    - Loaded from different domain
+    - Security restriction applies (SOP - same origin policy)
+

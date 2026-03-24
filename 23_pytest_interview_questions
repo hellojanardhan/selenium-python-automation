@@ -1,0 +1,842 @@
+1. What is Pytest?
+- Pytest is a Python testing framework used for automation testing  
+- It is used for unit testing and API testing  
+- It provides features like fixtures, parametrization, and plugins  
+- It has simple and readable syntax compared to unittest  
+- It automatically discovers and runs test files and functions  
+- It is widely used in Selenium UI automation, API testing, and CI/CD pipelines  
+
+Real-time usage:
+- Used for Selenium-based UI automation
+- Used for API testing using requests
+- Integrated with CI/CD pipelines like Jenkins
+
+Example:
+def test_add():
+    assert 2 + 3 == 5
+
+2. Why is Pytest popular?
+- Provides powerful fixtures for setup and teardown  
+- Supports parametrization to run tests with multiple inputs  
+- Has a strong plugin ecosystem (reporting, parallel execution)  
+- Gives detailed assertion reports for easy debugging  
+- Requires less boilerplate code compared to unittest  
+
+
+3. What are the key features and advantages of Pytest?
+- Simple and readable syntax  
+- Fixtures for setup and teardown  
+- Parametrization for data-driven testing  
+- Powerful assertions (no need for special assert methods)  
+- Automatic test discovery  
+
+4. How do you set up a Pytest development environment?
+- Install Python and create a virtual environment (python -m venv env)
+- Activate the virtual environment  (env\Scripts\activate)
+- Install pytest using pip  (pip install pytest)
+- Organize project with a test folder structure  
+- Run tests using the pytest command  (pytest -v)
+
+5. How do you handle functions and methods in Pytest?
+- Test cases can be written as simple functions or as methods inside a class  
+- Function-based tests are most commonly used because they are simple and require no class structure  
+- Class-based tests are used to group related test cases  
+- Test names should start with test_ for Pytest to identify them  
+- Fixtures can be used in both functions and methods by passing them as parameters  
+- No need to inherit from any base class (unlike unittest)  
+
+6. How do you handle input/output in Pytest?
+- Input is handled using parametrization, fixtures, or external data sources (JSON, CSV)  
+- Output is validated using assert statements  
+- capsys is used to capture console output  
+- Logging can be used for debugging and validation
+
+7. How do you debug Pytest code?
+- Use verbose mode (-v) to get detailed test execution output  
+- Use print statements or logging for debugging  
+- Use Python debugger (pdb) for step-by-step debugging  
+- Use pytest options like --pdb to enter debugger on failure  
+- Use --maxfail to stop execution after a certain number of failures  
+- Run commands:
+    pytest -s (pytest -s shows print statements and logs in the console by disabling output capturing, useful for debugging)
+    pytest -v (pytest -v is used to run tests in verbose mode and shows detailed test results with test names and status)
+    pytest --pdb
+    pytest -v --maxfail=1 (pytest -v --maxfail=1 runs tests in verbose mode and stops execution after the first failure, useful for quick debugging)
+
+8. How do you handle basic error scenarios in Pytest?
+- Error scenarios are handled using assertions for validation  
+- pytest.raises is used to handle and validate exceptions
+- skip and xfail are used to control test execution for known issues  
+- Helps in validating both positive and negative test cases  
+
+9. What are design patterns commonly used in Pytest?
+- Page Object Model (POM) is used for UI automation to separate test logic and UI actions  
+- Fixture-based design is used for setup and teardown of test data and resources  
+- Data-driven testing is achieved using parametrization  
+- Modular framework design is used to improve scalability and maintainability  
+- These patterns make test automation reusable, scalable, and easy to maintain  
+
+10. What are modules/packages in Pytest?
+- A module in Pytest is a single Python file that contains test cases  
+- A package is a collection of test modules organized in directories  
+- Pytest automatically discovers test modules and test functions without manual configuration  
+Example structure:
+tests/
+    test_login.py
+    test_home.py
+
+11. What is exception handling in Pytest?
+- Exception handling in Pytest is used to validate and handle expected errors in test cases  
+- It is mainly done using pytest.raises to verify that a specific exception is raised  
+- It is commonly used for negative testing and error validation  
+- Although Python try-except can be used, pytest.raises is the preferred approach in test cases
+- pytest.raises is preferred over try-except because it makes exception testing cleaner, 
+    more readable, and explicitly validates expected errors without manual assertions
+Example:
+import pytest
+def test_exception():
+    with pytest.raises(ValueError):
+        int("abc")
+
+12. How do you optimize Pytest code performance?
+- Pytest performance is optimized using parallel execution with pytest-xdist  
+- Fixture scope is optimized (session/module scope) to reduce repeated setup  
+- Unnecessary or redundant test execution is avoided  
+- Markers are used to run only required test cases (smoke, regression, etc.)  
+
+Example:
+# Run tests in parallel
+pytest -n 4
+
+
+13. What are best practices for Pytest development?
+- Follow proper naming conventions like test_* for files and functions  
+- Use fixtures for setup and teardown to avoid code duplication  
+- Use parametrization to avoid duplicate test cases  
+- Keep tests independent and self-contained  
+- Organize framework structure properly  
+- Use markers for grouping tests (smoke, regression)  
+
+Example:
+import pytest
+@pytest.mark.parametrize("a,b", [(1, 2), (3, 5), (5, 6)])
+def test_add(a, b):
+    result = a + b
+    assert result > 0
+
+14. How do you run a test with Pytest?
+- We run Pytest tests using the pytest command  
+- It automatically detects test files and test cases  
+- We can run all tests, a specific file, a specific test case, or filter tests using keywords and markers  
+- We can also use options like -v for verbose output and -n for parallel execution  
+
+Examples:
+pytest
+pytest -v
+pytest test_file.py
+pytest -k login
+pytest -n 2
+
+15. What is a test fixture in Pytest?
+- A fixture in Pytest is used to set up preconditions and clean up after test execution  
+- It helps in code reuse and managing test environments efficiently using setup and teardown logic  
+- Fixtures are reusable and can be shared across multiple test cases  
+Example:
+import pytest
+@pytest.fixture
+def setup():
+    return "data"
+def test_fixture(setup):
+    assert setup == "data"
+
+
+16. What is an assertion in Pytest, and how do you use it?
+- An assertion in Pytest is used to compare expected and actual results  
+- It uses Python’s built-in assert keyword  
+- If the condition fails, the test is marked as failed with an error message  
+- Pytest provides detailed failure messages to help debugging  
+Example:
+def test_assert():
+    assert 10 == 10
+
+17. What is the difference between assert and assert not in Pytest?
+- assert is used to verify that a condition is True  
+- assert not is used to verify that a condition is False  
+- Both are used for validations in Pytest test cases  
+
+Example:
+def test_condition():
+    assert 5 > 3
+    assert not (5 < 3)
+
+18. What is the pytest.ini file, and what is its purpose?
+- pytest.ini is a configuration file used to define global settings for Pytest  
+- It is used to configure markers, default command-line options, test discovery paths, and reporting settings  
+- It helps maintain consistent test execution across the project  
+
+Example:
+# pytest.ini
+[pytest]
+markers =
+    smoke: smoke tests
+    regression: regression tests
+
+19. How do you write a test case in Pytest?
+- In Pytest, a test case is written as a Python function starting with test_  
+- We use assert statements to validate expected results  
+- Pytest automatically discovers and executes test cases without a main method  
+
+Example:
+def test_example():
+    assert True
+
+20. What is a test suite in Pytest?
+- A test suite in Pytest is a collection of related test cases grouped in test files or folders  
+- It is used to test a specific feature or module  
+- Pytest treats test directories and files as test suites and executes them together  
+
+Example:
+tests/
+    test_login.py
+    test_home.py
+
+21. How do you skip a test in Pytest?
+- In Pytest, we can use @pytest.mark.skip to always skip a test  
+- We can use @pytest.mark.skipif for conditional skipping  
+- We can also use pytest.skip() inside a test for dynamic skipping  
+
+Example:
+import pytest
+@pytest.mark.skip
+def test_skip():
+    assert True
+
+22. How do you parametrize a test in Pytest?
+- Parametrization in Pytest allows us to run the same test case with multiple inputs using @pytest.mark.parametrize  
+- It helps reduce duplicate code and supports data-driven testing  
+- Each set of inputs is treated as a separate test execution  
+
+Example:
+import pytest
+@pytest.mark.parametrize("a,b", [(1,2), (3,4)])
+def test_add(a, b):
+    assert a + b > 0
+
+23. What is the purpose of the conftest.py file in Pytest?
+- conftest.py is a special file used to define shared fixtures, hooks, and configurations  
+- It allows reuse of setup code across multiple test files without importing  
+- It improves modularity and maintainability of the test framework  
+- Pytest automatically detects conftest.py, so no import is needed  
+
+Example:
+# conftest.py
+import pytest
+@pytest.fixture
+def setup():
+    return "shared data"
+# test file
+def test_example(setup):
+    assert setup == "shared data"
+
+24. What is monkey patching in Pytest, and how do you use it?
+- Monkey patching in Pytest is used to dynamically replace functions, methods, or variables at runtime  
+- It is mainly used to mock external dependencies like APIs, databases, or environment variables  
+- Pytest provides a built-in fixture called monkeypatch for this purpose  
+
+Example:
+def get_data():
+    return "real data"
+def test_monkeypatch(monkeypatch):
+    def mock_data():
+        return "mock data"
+
+    monkeypatch.setattr(__name__ + ".get_data", mock_data)
+    assert get_data() == "mock data"
+
+25. What is the difference between xfail and skip in Pytest?
+- @pytest.mark.skip is used to completely skip a test without executing it  
+- @pytest.mark.xfail is used when a test is expected to fail due to a known issue or pending bug fix  
+- In xfail, the test is executed but failure is not treated as a real failure  
+
+Example:
+import pytest
+@pytest.mark.skip
+def test_skip():
+    assert 1 == 2
+@pytest.mark.xfail
+def test_xfail():
+    assert 1 == 2
+
+26. What is the difference between pytest.raises and assert_raises?
+- pytest.raises is used in Pytest to validate exceptions using a context manager  
+- assertRaises is used in the Unittest framework  
+- pytest.raises is more readable, flexible, and recommended in Pytest  
+
+Example:
+import pytest
+def test_exception():
+    with pytest.raises(ValueError):
+        int("abc")
+
+27. How do you test for exceptions in Pytest?
+- In Pytest, exceptions are tested using pytest.raises  
+- It verifies that a specific exception is raised during test execution  
+- It is mainly used for negative test cases and error validation  
+- We can also validate exception messages if needed  
+
+Example:
+import pytest
+def test_error():
+    with pytest.raises(TypeError):
+        len(10)
+
+28. What is a parametrized fixture in Pytest?
+- A parametrized fixture in Pytest is a fixture that runs multiple times with different input values using the params keyword  
+- It is used for data-driven testing and helps reduce code duplication  
+- Each parameter value is passed to the test one by one  
+
+Example:
+import pytest
+@pytest.fixture(params=[1, 2, 3])
+def data(request):
+    return request.param
+def test_param(data):
+    assert data > 0
+
+
+29. What is the difference between a fixture and a mock in Pytest?
+- A fixture in Pytest is used to set up test data, state, or environment before test execution  
+- A mock is used to replace real dependencies like APIs, databases, or services with fake objects to isolate the test  
+- Fixtures focus on setup/teardown, while mocks focus on simulating external dependencies  
+
+NOTE:
+- Mocking is a testing technique where real dependencies are replaced with fake objects that return predefined responses  
+- It is used when real systems are unavailable or should not be called during testing  
+
+Example:
+
+import pytest
+@pytest.fixture
+def user_data():
+    return "real_user"
+def test_fixture(user_data):
+    assert user_data == "real_user"
+
+from unittest.mock import Mock
+def test_mock():
+    api = Mock()
+    api.get_data.return_value = "mocked"
+    assert api.get_data() == "mocked"
+
+30. What is a test runner in Pytest, and how does it work?
+- A test runner in Pytest is responsible for discovering, collecting, and executing test cases and generating test results  
+- In Pytest, the pytest command itself acts as the test runner  
+- It automatically finds test files and test functions based on naming conventions  
+Example:
+    pytest
+    pytest -v
+
+31. How do you debug a failing test in Pytest?
+- To debug a failing test in Pytest, we use verbose mode (-v) and print output (-s)  
+- We can run only failed tests using --lf  
+- We can stop execution after first failure using -x  
+- We can use pdb (--pdb) to debug step-by-step and inspect variables  
+
+Example:
+def test_debug():
+    x = 10
+    print(x)
+    assert x == 10
+Debug commands:
+pytest -v -s --lf -x --pdb
+
+32. What is a test coverage report, and how do you generate it in Pytest?
+- A test coverage report shows how much application code is covered by test cases  
+- It helps identify untested parts of the codebase  
+- It is generated using the pytest-cov plugin  
+Example:
+    pip install pytest-cov
+    pytest --cov=.
+    pytest --cov=app --cov-report=html
+
+33. What is a Pytest plugin, and how do you use it?
+- A Pytest plugin is an extension that adds extra features like reporting, parallel execution, and coverage  
+- Common plugins include pytest-xdist, pytest-cov, and pytest-html  
+- Plugins are used by installing and passing options in pytest commands  
+
+Example:
+    pytest --cov=app
+    pytest --html=report.html
+    pytest -n 4
+
+
+34. What is the pytest-mock plugin, and how do you use it?
+- pytest-mock is a plugin that provides the "mocker" fixture to easily mock functions, APIs, and objects using Python's unittest.mock library.
+- It is used to isolate test cases and avoid real external dependencies.
+
+Example:
+def test_mock(mocker):
+    mock_func = mocker.patch("module.get_data")
+    mock_func.return_value = "mocked data"
+    assert mock_func() == "mocked data"
+
+
+35. How do you write parameterized tests with Pytest?
+- Parameterized tests in Pytest are written using the @pytest.mark.parametrize decorator  
+- It allows running the same test with multiple sets of input values  
+- It improves reusability, reduces duplication, and increases test coverage  
+Example:
+
+import pytest
+@pytest.mark.parametrize("a,b,result", [
+    (2, 3, 5),
+    (1, 1, 2),
+    (10, 5, 15)
+])
+def test_add(a, b, result):
+    assert a + b == result
+
+36. What is a Pytest hook, and how do you use it?
+- A Pytest hook is a function that allows us to customize the test execution lifecycle such as collection, setup, execution, and reporting  
+- Hooks are mainly defined in conftest.py or plugins to extend Pytest behavior  
+- They are used for logging, reporting customization, and framework enhancements  
+
+Example:
+# conftest.py
+def pytest_runtest_setup(item):
+    print(f"Starting test: {item.name}")
+
+37. How do you run tests in parallel with Pytest?
+- In Pytest, tests are run in parallel using the pytest-xdist plugin  
+- The -n option is used to specify the number of workers (CPU cores)  
+- It helps reduce execution time for large test suites  
+
+Example:
+pytest -n 4
+
+38. How do you use fixtures in a class with Pytest?
+- In Pytest, fixtures can be used inside classes by passing them as parameters to test methods  
+- They help in setting up reusable test data or environment configurations for multiple test cases within the class  
+- Fixtures can be shared across all methods in the class  
+
+Example:
+
+import pytest
+@pytest.fixture
+def setup():
+    return "data"
+class TestExample:
+    def test_one(self, setup):
+        assert setup == "data"
+
+39. What is a Pytest marker, and how do you use it?
+- A Pytest marker is used to categorize test cases  
+- It helps in grouping, filtering, skipping, and selecting specific tests  
+- We use @pytest.mark.<name> to apply markers and run tests using pytest -m <marker>  
+
+Example:
+
+import pytest
+@pytest.mark.smoke
+def test_login():
+    assert True
+# Run:
+pytest -m smoke
+
+40. How do you set up and tear down a fixture in Pytest?
+- In Pytest, setup and teardown are handled using fixtures with yield  
+- Code before yield is setup phase  
+- Code after yield is teardown phase  
+- Pytest automatically runs setup before the test and teardown after the test  
+Example:
+
+import pytest
+@pytest.fixture
+def setup():
+    print("setup")
+    yield "data"
+    print("teardown")
+def test_example(setup):
+    assert setup == "data"
+
+41. What is a Pytest fixture factory, and how do you use it?
+- A Pytest fixture factory is a fixture that returns a function  
+- This allows tests to generate dynamic data multiple times with different inputs  
+- It is useful for creating flexible and reusable test data in automation frameworks  
+
+Example:
+
+import pytest
+@pytest.fixture
+def make_user():
+    def _create_user(name):
+        return {"name": name}
+    return _create_user
+def test_factory(make_user):
+    user = make_user("Janardhan")
+    assert user["name"] == "Janardhan"
+
+42. How do you use fixtures to share state between tests?
+- In Pytest, fixtures are used to share state between tests by returning reusable objects or data  
+- By using fixture scopes like function, class, module, or session, we can control how long the state is shared across test cases  
+- This helps in reusing setup and maintaining consistency across multiple tests  
+
+Example:
+
+import pytest
+@pytest.fixture(scope="module")
+def shared_data():
+    return {"count": 0}
+def test1(shared_data):
+    shared_data["count"] += 1
+    assert shared_data["count"] == 1
+def test2(shared_data):
+    assert isinstance(shared_data, dict)
+
+43. What is the yield statement in a fixture, and how do you use it?
+- In Pytest fixtures, the yield statement is used to separate setup and teardown logic  
+- Code before yield runs before the test (setup phase)  
+- Code after yield runs after the test (teardown/cleanup phase)  
+- It allows clean and reusable test resource management  
+
+Example:
+
+import pytest
+@pytest.fixture
+def setup():
+    print("setup")
+    yield "data"
+    print("teardown")
+
+44. How do you define a fixture in Pytest, and what are some common fixtures you might use?
+- A fixture in Pytest is defined using the @pytest.fixture decorator  
+- It provides reusable setup and teardown logic for tests  
+- Fixtures help manage test dependencies like data, connections, or environments  
+- Common fixtures include database connections, API clients, browser setup, login setup, authentication tokens, and test data  
+
+Example:
+
+import pytest
+@pytest.fixture
+def api_client():
+    return {"url": "http://api.test"}
+
+def test_api(api_client):
+    assert "url" in api_client
+
+45. How do you use a fixture in a test function in Pytest?
+- In Pytest, a fixture is used in a test function by passing its name as a parameter  
+- Pytest automatically executes the fixture and injects the returned value into the test function  
+- This is called dependency injection in Pytest  
+
+Example:
+
+import pytest
+
+@pytest.fixture
+def sample_data():
+    return 10
+def test_value(sample_data):
+    assert sample_data == 10
+
+46. What is the scope of a fixture in Pytest, and how do you control it?
+- The scope of a fixture controls how often it is executed  
+- It defines how long the fixture value is shared across tests  
+- Common scopes are: function, class, module, and session  
+- It is controlled using the scope parameter in @pytest.fixture(scope="...")  
+
+Example:
+import pytest
+@pytest.fixture(scope="session")
+def db_connection():
+    print("DB connected")
+    return "connection"
+
+47. How do you parameterize a fixture in Pytest?
+- A parameterized fixture is created using the params argument in @pytest.fixture  
+- It allows the same fixture to run multiple times with different input values  
+- This is useful for data-driven testing and reducing duplicate test code  
+- Pytest uses request.param to access each value  
+
+Example:
+
+import pytest
+@pytest.fixture(params=[1, 2, 3])
+def numbers(request):
+    return request.param
+
+def test_numbers(numbers):
+    assert numbers > 0
+
+48. What is test discovery in Pytest?
+- Test discovery is the process where Pytest automatically finds test files and test cases  
+- Pytest follows naming conventions to identify tests  
+- Test files must start with test_ or end with _test.py  
+- Test functions must start with test_  
+
+Example structure:
+    test_login.py
+    test_home.py
+
+
+49. What is the difference between Pytest and Unittest?
+- Pytest is simple, uses functions, and provides powerful features like fixtures and parametrization  
+- Unittest is class-based and requires more boilerplate code  
+- Pytest is more readable, flexible, and widely used in automation frameworks  
+- Pytest has better plugins and reporting support compared to unittest  
+
+Key difference:
+- Pytest → simple, functional, scalable  
+- Unittest → structured, but heavy  
+
+50. What is pytest-html?
+- pytest-html is a plugin used to generate HTML reports for test execution  
+- It helps in sharing and analyzing test results in a visual format  
+- It is widely used in automation frameworks for reporting  
+
+Example:
+pytest --html=report.html
+
+51. What is pytest-xdist?
+- pytest-xdist is a plugin used for parallel execution of tests  
+- It runs tests on multiple CPUs to improve execution speed  
+- It is useful for large test suites to reduce execution time  
+
+Example:
+    pytest -n 4
+
+52. What is a flaky test?
+- A flaky test is a test that sometimes passes and sometimes fails without any code changes  
+- It usually happens due to timing issues, unstable environments, or external dependencies  
+- Flaky tests reduce trust in automation results and should be fixed  
+
+53. What is dependency between tests? Is it recommended?
+- Dependency means one test depends on the result or execution of another test  
+- It is not recommended in Pytest  
+- Tests should always be independent to ensure reliability and easy debugging  
+- Independent tests can run in any order without failure
+
+54. What is ids in parametrization?
+- ids are used to give custom readable names to parametrized test cases  
+- It helps make test reports more readable and meaningful  
+- It is useful for debugging and identifying which test case failed easily  
+
+Example:
+
+import pytest
+@pytest.mark.parametrize(
+    "a,b",
+    [(1, 2), (3, 4)],
+    ids=["small_case", "large_case"]
+)
+def test_example(a, b):
+    assert a < b
+
+
+55. What is request fixture?
+- request is a built-in Pytest fixture used to access fixture context and test metadata  
+- It is mainly used in parametrized fixtures and for dynamic fixture behavior  
+- It helps retrieve information about the current test execution  
+Common uses:
+- request.param → access parametrized values  
+- request.function → access test function information  
+
+56. What is tmp_path fixture?
+- tmp_path is a built-in Pytest fixture that provides a temporary directory for test execution  
+- It is mainly used for file handling and file-based testing  
+- Pytest automatically cleans up the directory after test execution  
+
+Example:
+def test_file(tmp_path):
+    file = tmp_path / "test.txt"
+    file.write_text("hello")
+    assert file.read_text() == "hello"
+
+57. What is caplog fixture?
+- caplog is a built-in Pytest fixture used to capture log messages during test execution  
+- It is used to validate logging output in applications  
+- It helps ensure that correct logs are generated during execution  
+
+Example:
+import logging
+def test_logging(caplog):
+    logging.warning("warning message")
+    assert "warning message" in caplog.text
+
+58. How do you integrate Pytest with Selenium?
+- Pytest is used as the test runner, and Selenium is used for browser automation  
+- Fixtures are used to manage browser setup and teardown  
+- Tests interact with the web application using WebDriver commands  
+- This combination is widely used in UI automation frameworks  
+
+Example:
+import pytest
+from selenium import webdriver
+@pytest.fixture
+def driver():
+    driver = webdriver.Chrome()
+    yield driver
+    driver.quit()
+
+def test_google(driver):
+    driver.get("https://google.com")
+    assert "Google" in driver.title
+
+59. How do you implement Page Object Model (POM) in Pytest?
+- Page Object Model (POM) separates UI locators and page actions from test logic  
+- It improves code maintainability, reusability, and readability in automation frameworks  
+- In Pytest, page classes are used with fixtures like WebDriver  
+
+Example:
+class LoginPage:
+    def __init__(self, driver):
+        self.driver = driver
+
+    def login(self, username, password):
+        pass
+def test_login(driver):
+    page = LoginPage(driver)
+    page.login("user", "pass")
+
+60. How do you handle waits in Pytest + Selenium?
+- In Pytest with Selenium, waits are used to handle dynamic web elements  
+- There are two types: implicit wait and explicit wait  
+- Explicit waits are preferred because they wait for specific conditions  
+- They improve test stability and reduce flaky tests  
+
+Example:
+
+from selenium.webdriver.common.by import By
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
+def test_wait(driver):
+    WebDriverWait(driver, 10).until(
+        EC.presence_of_element_located((By.ID, "id"))
+    )
+
+61. How do you read test data from external files?
+- In Pytest, test data can be read from external files like JSON, CSV, or Excel  
+- This supports data-driven testing and improves reusability  
+- It helps separate test logic from test data  
+
+Example (JSON):
+import json
+def test_data():
+    with open("data.json") as f:
+        data = json.load(f)
+    assert data["name"] == "John"
+
+62. How do you implement logging in Pytest?
+- In Pytest, logging is implemented using Python’s built-in logging module  
+- Logs can be captured and validated using the caplog fixture  
+- It helps in debugging and verifying application behavior during test execution  
+
+Example:
+import logging
+def test_log(caplog):
+    logging.info("test log")
+    assert "test log" in caplog.text
+
+63. How do you rerun failed tests in Pytest?
+- In Pytest, failed tests can be rerun using the pytest-rerunfailures plugin  
+- It helps handle flaky tests by automatically retrying failed test cases  
+- This improves stability in CI/CD pipelines  
+
+Example:
+    pytest --reruns 2
+
+64. How do you run tests in CI/CD (Jenkins/GitHub Actions)?
+- In CI/CD pipelines, Pytest is executed using the pytest command in the build stage  
+- Test reports are generated for analysis (HTML, JUnit XML, etc.)  
+- These reports are integrated with tools like Jenkins or GitHub Actions for visibility  
+- This ensures automated testing in every code commit or deployment  
+
+Example:
+    pytest -v --html=report.html
+
+65. How do you handle API testing with Pytest?
+- In Pytest, API testing is done using the requests library  
+- We send HTTP requests and validate responses using assertions  
+- We verify status codes, response body, headers, and data integrity  
+- It is widely used for backend and microservices testing  
+
+Example:
+import requests
+def test_api():
+    res = requests.get("https://api.github.com")
+    assert res.status_code == 200
+
+66. How do you mark tests as smoke, regression, sanity?
+- In Pytest, we use markers to categorize test cases  
+- Markers help in grouping and selectively running tests  
+- Common markers include smoke, regression, sanity  
+
+Example:
+import pytest
+@pytest.mark.smoke
+def test_smoke():
+    assert True
+Run:
+pytest -m smoke
+
+67. How do you structure a Pytest framework (real-time)?
+- A real-time Pytest framework is structured in a modular way for scalability and maintainability  
+- It separates tests, page objects, utilities, and configurations  
+
+Typical structure:
+project/
+├── tests/
+├── pages/
+├── utils/
+├── conftest.py
+├── pytest.ini
+
+68. How do you handle authentication (token/session) in tests?
+- Authentication in Pytest is handled using fixtures  
+- Tokens or session data are generated once and reused across tests  
+- This improves efficiency and avoids repeated login calls  
+
+Example:
+import pytest
+@pytest.fixture(scope="session")
+def token():
+    return "auth_token"
+
+69. How do you handle database testing in Pytest?
+- Database testing is handled using fixtures for DB connection and setup  
+- Data is validated using queries and assertions  
+- Fixtures help manage setup and teardown of DB resources  
+
+Example:
+import pytest
+@pytest.fixture
+def db():
+    return "connection"
+
+70. How do you reduce test execution time?
+- Use parallel execution with pytest-xdist  
+- Optimize fixture scope (use session/module level where possible)  
+- Run only required tests using markers and filters  
+- Avoid redundant setup and teardown operations  
+
+71. What are common Pytest interview mistakes?
+- Not using fixtures properly  
+- Writing dependent tests (tests should be independent)  
+- Ignoring edge cases  
+- Not handling flaky tests
+
+72. What is the difference between fixture scopes?
+- Function → runs before every test function  
+- Class → runs once per test class  
+- Module → runs once per test file  
+- Session → runs once for the entire test execution  
+
+Example:
+import pytest
+@pytest.fixture(scope="module")
+def data():
+    return "shared"
+
+73. What is boilerplate code?
+- Boilerplate code is repetitive and unnecessary code required in a framework  
+- Pytest reduces boilerplate by using simple functions and fixtures instead of heavy setup code  

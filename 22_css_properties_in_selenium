@@ -1,0 +1,118 @@
+TOP CSS PROPERTIES USED IN SELENIUM (QA INTERVIEW IMPORTANT)
+
+1. color
+Used for text color validation
+Example: color: rgba(255, 255, 255, 1);
+Selenium: element.value_of_css_property("color")
+
+--------------------------------------------------
+
+2. background-color
+Used for button hover / UI state change
+Example: background-color: rgba(40, 167, 69, 1);
+Selenium: element.value_of_css_property("background-color")
+
+--------------------------------------------------
+
+3. font-size
+Used for UI scaling / responsiveness
+Example: font-size: 16px;
+Selenium: element.value_of_css_property("font-size")
+
+--------------------------------------------------
+
+4. font-weight
+Used for bold/normal validation
+Example: font-weight: 700;
+Selenium: element.value_of_css_property("font-weight")
+
+--------------------------------------------------
+
+5. border
+Used for highlight / hover effect
+Example: border: 1px solid green;
+Selenium: element.value_of_css_property("border")
+
+--------------------------------------------------
+
+6. opacity
+Used for fade in / fade out effects
+Example: opacity: 0.5;
+Selenium: element.value_of_css_property("opacity")
+
+--------------------------------------------------
+
+7. transform
+Used for zoom, rotate, move effects
+Example: transform: scale(1.2) / rotate(45deg);
+Selenium: element.value_of_css_property("transform")
+
+--------------------------------------------------
+
+8. filter
+Used for image effects (blur, grayscale)
+Example: filter: blur(2px) grayscale(100%);
+Selenium: element.value_of_css_property("filter")
+
+--------------------------------------------------
+
+9. display
+Used for show/hide elements
+Example: display: none / block;
+Selenium: element.value_of_css_property("display")
+
+--------------------------------------------------
+
+10. visibility
+Used for visibility control
+Example: visibility: hidden / visible;
+Selenium: element.value_of_css_property("visibility")
+
+--------------------------------------------------
+
+11. cursor
+Used for pointer / hover behavior
+Example: cursor: pointer;
+Selenium: element.value_of_css_property("cursor")
+
+--------------------------------------------------
+
+12. box-shadow
+Used for glow / shadow effects
+Example: box-shadow: 0px 4px 10px rgba(0,0,0,0.3);
+Selenium: element.value_of_css_property("box-shadow")
+
+--------------------------------------------------
+
+13. text-align
+Used for text alignment validation
+Example: text-align: center;
+Selenium: element.value_of_css_property("text-align")
+
+--------------------------------------------------
+
+14. line-height
+Used for spacing validation
+Example: line-height: 24px;
+Selenium: element.value_of_css_property("line-height")
+
+--------------------------------------------------
+
+IMPORTANT INTERVIEW POINT
+
+In Selenium, we validate CSS properties using:
+element.value_of_css_property("property_name")
+
+We always compare:
+Before Action vs After Action
+
+Example:
+Hover / Click / Scroll → Check CSS change
+
+--------------------------------------------------
+
+FINAL INTERVIEW ANSWER:
+
+"In Selenium, we validate UI changes using CSS properties like color, 
+background-color, font-size, font-weight, border, opacity, transform, and filter. 
+We use value_of_css_property() method and compare values before and after actions like hover or click to verify UI behavior."

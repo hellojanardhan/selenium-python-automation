@@ -1,0 +1,52 @@
+1️⃣ Basic Concept
+
+1. What is a broken image?
+- An <img> element whose source URL does not load properly, usually showing a broken image icon in the browser.
+
+2. How can a broken image occur?
+- Invalid URL, missing file, server/network issues, file moved/deleted.
+
+2️⃣ Detection Methods
+3. How do you detect broken images in Selenium?
+- HTTP Method -> Check image URL with requests.head() and verify status code
+- Javascript method -> Check image.complete and image.naturalWidth == 0
+
+4. Can broken images throw Selenium exceptions?
+No, Selenium does not throw exceptions by default for broken images.
+
+5. How can you check broken images on dynamic pages?
+- Use Explicti wait (WebDriverWait) to ensure images are loaded before checking
+
+3️⃣ Handling & Validation
+6. How can you validate broken images in automation?
+- Loop throug all <img> elements.
+- Use HTTP requests or JS check
+- Log/report the URLs of broke images.
+
+7. How do you report broken images in Selenium?
+- print the "src" in console , log in report file(HTML, Excel, JSON) or generate test report in automation framework
+
+8. Can you fix broken images using Selenium?
+- NO, Selenium can only detect, not fix broken images. Fixing requires server-side or web content update.
+
+4️⃣ Best Practices
+9. Should you check for broken images in automation testing?
+- YES, to ensure UI completeness, user experience, and website quality
+
+10. Is it better to use HTTP check or JavaScript check?
+- JS Check -> Fast, works on loaded DOM
+- HTTP Check -> More accurate, detects server errors even if broken images appears on page
+
+11. Can broken images affect UI automation scripts?
+- Rarely, They usually don't break scripts, but may affect tests if the image is used in element detection or visual validation
+
+5️⃣ Advanced/Scenario-based
+12. How can you detect broken images in a page with AJAX-loaded content?
+-> Wait for images to appear using Explicit Wait (WebDriverWait) and then perform JS or HTTP Check
+
+13. How can you detect broken images without using Python requests library?
+- Use Javascript -> img.complete && img.naturalWidth>0 inside driver.execute.script()
+
+14.Can Selenium detect broken images in hidden or lazy-loaded sections?
+- YES, Only if the image is loaded in DOM; for lazy-loaded images, scroll into view first, then check.
+

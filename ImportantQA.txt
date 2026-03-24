@@ -1,0 +1,63 @@
+1. What is Pytest?
+2. Why is Pytest popular?
+3. What are the key features and advantages of Pytest?
+4. How do you set up a Pytest development environment?
+5. What are variables and data types in Pytest?
+
+6. How do you handle functions and methods in Pytest?
+7. Explain control flow statements in Pytest
+8. What are the basic operators in Pytest?
+9. How do you handle input/output in Pytest?
+
+10. What is the standard library/built-in functions in Pytest?
+11. How do you debug Pytest code?
+12. What are comments and documentation in Pytest?
+13. How do you handle basic error scenarios in Pytest?
+14. How does Pytest handle memory management?
+15. What are design patterns commonly used in Pytest?
+16. What are modules/packages in Pytest?
+17. What is exception handling in Pytest?
+18. How do you optimize Pytest code performance?
+19. What are best practices for Pytest development?
+
+20. What is Pytest, and why do we use it?
+21. How do you run a test with Pytest?
+22. What is a test fixture in Pytest?
+23. What is an assertion in Pytest, and how do you use it?
+24. What is the pytest.ini file, and what is its purpose?
+25. How do you write a test case in Pytest?
+26. What is a test suite in Pytest?
+
+27. How do you skip a test in Pytest?
+28. How do you parametrize a test in Pytest?
+29. What is the purpose of the conftest.py file in Pytest?
+30. What is monkey patching in Pytest, and how do you use it?
+31. What is the difference between xfail and skip in Pytest?
+32. How do you test for exceptions in Pytest?
+33. What is a parametrized fixture in Pytest?
+34. What is the difference between a fixture and a mock in Pytest?
+35. What is a test runner in Pytest, and how does it work?
+36. How do you debug a failing test in Pytest?
+37. What is a test coverage report, and how do you generate it in Pytest?
+38. What is a Pytest plugin, and how do you use it?
+39. What is the pytest-mock plugin, and how do you use it?
+40. What is a Pytest hook, and how do you use it?
+41. How do you run tests in parallel with Pytest?
+42. How do you use fixtures in a class with Pytest?
+43. What is a Pytest marker, and how do you use it?
+44. How do you set up and tear down a fixture in Pytest?
+45. What is a Pytest fixture factory, and how do you use it?
+46. How do you use fixtures to share state between tests?
+47. What is the yield statement in a fixture, and how do you use it?
+48. What is the scope of a fixture in Pytest, and how do you control it?
+49. How do you parameterize a fixture in Pytest?
+50. What is test discovery in Pytest?
+51. What is the difference between Pytest and Unittest?
+52. What is pytest-html?
+53. What is pytest-xdist?
+54. What is a flaky test?
+55. What is dependency between tests? Is it recommended?
+56. What is ids in parametrization?
+57. What is request fixture?
+58. What is tmp_path fixture?
+59. What is caplog fixture?

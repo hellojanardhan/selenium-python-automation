@@ -1,0 +1,144 @@
+1. What is popup?
+- Popup is an UI element that appears on the top of the main page to take user input or show information. It can be:
+    - Window popup
+    - Alert popup
+    - Modal popup
+
+2. What are the types of popups in selenium?
+- Types of popups:
+    - Browser window popups
+    - JavaScript alert popup
+    - HTML modal popup
+    - Authentication popup
+
+3. Can Selenium handle all types of popups directly?
+- No , Selenium can handle:
+    1. Alerts , YES (switch_to_alert)
+    2. Window , YES (switch_to_window)
+    3. Modal , YES (normal DOM elements)
+But OS-level popups -> Not directly supported
+
+4. What is a window popup?
+- A window popup is when clicking a link/button opens a new browser window/tab 
+
+5. How does Selenium identify multiple windows?
+- Using driver.window_handles
+
+6. How do you switch between windows in Selenium?
+- Using
+    driver.switch_to_window(window)
+
+7. What is a window handle?
+- A unique ID assigned by the browser to each window/tab
+
+8. How do you switch back to the main window?
+- main_window = driver.current_window_handle
+- driver.switch_to_window(main_window)
+
+9. How do you handle multiple windows?
+    main = driver.current_window_handle
+
+    for handle in driver.window_handles:
+        if handle != main:
+            driver.switch_to.window(handle)
+            break
+
+10. How do you wait for a new window to open?
+- Use explciti Wait (WebDriverWait)
+
+    WebDriverWait(driver , 10).until(EC.number_of_window_to_be(2))
+
+11. What is a modal popup?
+- A modal popup is an HTML element displayed over the page without opening a new window
+
+12. How do you handle modal popup in Selenium?
+- We handle it like normal elements:
+    driver.find_element(By.ID, "username").send_keys("test")
+- No Switching required
+
+13. Difference between window popup and modal popup?
+Feature & Window Popup & Modal Popup
+------------------------------------
+- Type -> Browser window popup , Normal HTML modal 
+- Switching needed -> YES , NO
+- Selenium method -> switch_to_window , normal locators
+- DOM presence -> separate , same page
+
+14. What happens if you don’t switch to a new window?
+- Selenium will throw exception
+    NoSuchElementException
+
+15. How do you switch window by title?
+    from window in driver.window_handles:
+        driver.switch_to_handle:
+            if "Google" in driver.title:
+                break
+
+16. What is the difference between driver.close() and driver.quit()?
+- driver.close() -> used to close current window
+- driver.quit() -> close all browser windows
+
+17. How do you handle dynamic window popups in real-time?
+- Steps:
+    - Store main window
+    - trigger action
+    - wait for new window
+    - switch to new window
+    - perform action
+    - close child window
+    - switch back
+
+18. Can modal popup be handled using switch_to.window?
+- NO , Because modal popup is part of DOM, not a separate window
+
+19. How do you handle authentication popups in Selenium?
+- Selenium cannot handles OS level popups directly
+- Solution : URL Injection
+    driver.get("https://user:pass@site.com")
+
+20. What is a real-time example of window popup in testing?
+- Payment gateways (PayPal, Razorpay)
+- Social login (Google login)
+- Ads opening in new tab
+
+21. What is the biggest challenge in window handling?
+- Multiple windows opening unpredictably
+- Sitching to current window
+- Synchroizatoin issues
+
+22. How do you ensure you are in the correct window?
+- Checj:
+    - Title
+    - URL
+    - Element presence
+    assert "Dashboard" in driver.title
+
+23. What happens if window closes and you try to switch back?
+- You will get:
+    NoSuchWindowException
+
+24. How do you handle multiple tabs opened automatically?
+    for handle in driver.window_handles:
+        driver.switch_to_handle(handle)
+Then validate each.
+
+25. Can Selenium interact with hidden modal popups?
+- YES , but only after:
+    - Waiting for visibility
+    - Using explicit wait
+
+26. Window opens but Selenium still cannot find elements. Why?
+- Because , you did not switch to new window
+
+27. Modal popup is visible but click fails. Why?
+- Possible reasons:
+    - Overlay not fully loaded
+    - Element not clickable
+    - Need explicti wait
+
+28. How do you debug window handling issues?
+- Print window handles
+- print titles
+- Use screenshots
+- Use explcit waits
+

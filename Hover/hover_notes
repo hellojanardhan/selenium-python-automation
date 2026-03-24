@@ -1,0 +1,75 @@
+1. What is Hover Action?
+- Hover (Mouse over) means moving the mouse pointer over an element without clicking it.
+- In web applications, hovering is used to:
+    - Show dropdown menus
+    - Display tooltips
+    - Reveal hidden buttons(Edit/Delete)
+    - Trigger Animations
+
+2. Selenium Tool Used
+- We use
+    from selenium.webdriver.common.action_chains import ActionChains
+
+- class used -> ActionChains(driver)
+
+3. Basic Syntax
+- Syntax
+    actions = ActionChains(driver)
+    actions.move_to_element(element).perform
+
+4. Simple Example (Hover Demo)
+
+from selenium import webdriver
+from selenium.webdriver.common.by import By
+from selenium.webdriver.common.action_chains import ActionChains
+import time
+
+driver = webdriver.Chrome()
+driver.get("https://the-internet.herokuapp.com/hovers")
+driver.maximize_window()
+
+
+element = driver.find_element(By.XPATH, "(//div[@class='figure'])[1]")
+
+actions = ActionChains(driver)
+actions.move_to_element(element).perform()
+
+# click hidden link after hover
+time.sleep(2)
+driver.find_element(By.XPATH, "(//a[text()='View profile'])[1]").click()
+
+
+print("Hover action completed")
+driver.quit()
+
+5. Types of Hover Actions
+- Simple Hover
+    actions.move_to_perform(element).perform()
+
+- Hover + Click
+    actions.move_to_element(element).click().perform()
+
+- Hover on Menu (real-time)
+    actions.move_to_element(menu).perform()
+    driver.find_element(By.LINK_TEXT, "Sub Menu").click()
+
+6. Real Time Use Cases
+- Amazon menu hover(Departments)
+- Flipkart category hover
+- Dropdown navigation menus
+- Tooltip validation
+- Hidden buttons(Edit/Delete icons)
+
+7. Common Issues & Fixes
+❌ Hover not working ✔ Fix: add wait / ActionChains re-initialize
+❌ Element not visible ✔ Fix: scroll into view
+    driver.execute_script("arguments[0].scrollIntoView();", element)
+
+❌ Dynamic menu disappears ✔ Fix: use explicit wait
+
+8. Best Practices
+- Always use explicit wais
+- Avoid time.sleep in real frameworks
+- Re-initialize ActionChains if needed
+- Use stable locators
+

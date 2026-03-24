@@ -1,0 +1,65 @@
+1. What is Drag and Drop in Selenium?
+- Drag and Dran is an mouse interaction where we drag an element (source) and drop it onto another element (target) using selenium automation
+
+2. Which class is used to perform Drag and Drop?
+- We use the ActionChains class from selenium.webdriver.common.action_chains
+
+3. What is the syntax for Drag and Drop?
+- Syntax
+    ActionChains(driver).drag_and_drop(source, target).perform()
+
+4. Why does drag_and_drop() sometimes fail?
+- It may fail because:
+    - Element not visible or not interactable
+    - Element is inside an iframe
+    - Timing issue (page not loaded)
+    - Modern UI frameworks (React, Angular) handle events differently
+
+5. What is the alternative approach for Drag and Drop?
+- Syntax
+    ActionChains(driver).click_and_hold(source)\
+                        .move_to_element(target)\
+                        .release()\
+                        .perform()
+-> This is more reliable in real-time application
+
+6. What are different types of Drag and Drop?
+- Element to Element
+- Drag By Offset(x, y coordinates)
+
+7. How do you perform Drag and Drop by offset?
+- Syntax:
+    ActionChains(driver).drag_and_drop_by_offset(source , x , y).peform()
+
+8. How do you handle Drag and Drop inside an iframe?
+- First switch to iframe
+    driver.switch_to_iframe("frame_name")
+- Then perform drag and perform
+
+9. Drag and Drop is not working. What will you do?
+- Check if element is visible
+- Add explicit wait
+- Check for iframe and switch
+- Try alternative method (click_and_wait)
+- Use Javascript executor if needed
+
+10. Can we use JavaScript for Drag and Drop?
+- YES , when selenium actions fail (especially in complex UI apps), we can use Javascript executor to simulate drag and drop events.
+
+11. What is perform() in ActionChains?
+- perform() executes all the actions that are stored in the ActionChains object.
+
+12. What happens if we don’t use perform()?
+- The actions will not execute because ActionChains only stores actions until perform() is called.
+
+13. How do you debug Drag and Drop failures?
+- Add wait and logs
+- Check locators
+- Verify element visibily
+- Try step-by-step actions
+- Use browser developer tools
+
+14. Can Drag and Drop work on all browsers?
+- Mostly YES, but behavior may vary slightly depending on browser and application in implementation
+
+15. 

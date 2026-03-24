@@ -1,0 +1,47 @@
+1. How do you handle file download in Selenium?
+- Configure browser settings
+- Click download button
+- Verify file in local
+
+2. Can Selenium handle OS download popups?
+- NO, Selenium cannot handle OS-level dialogs
+- Use browser configuration to bypass popup
+
+3. How do you verify file is downloaded?
+- File exists
+- Check file size
+- Check file extension
+
+4. How do you set download path in Chrome?
+options.add_experimental_options("prefs",{
+    "download.default_directory":path,
+    "download.prompt_for_download" : False
+}
+)
+
+5. How do you handle dynamic file names?
+- Use:
+    - Partial name match
+    - Latest file in folder
+
+6. How do you ensure file download is complete?
+- Wait until:
+    - .crdownload file disappears
+    - file size stabilizes
+
+7. How do you validate file content?
+- open file (txt, csv , pdf)
+- Read and asser content
+
+8. What is .crdownload file?
+- Temporary file created during download in chrome
+- Removed after download completes
+
+9. Can you automate file download without Selenium?
+- YES, Using requests library directly
+
+10. Difference between upload and download handling?
+Upload & Download
+------------------
+- Use send_keys -> use browser settings
+- Easy -> Requires config
